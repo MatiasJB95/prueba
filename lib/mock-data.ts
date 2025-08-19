@@ -1,0 +1,276 @@
+import type { TeamType } from "./types"
+
+export const mockTeams: TeamType[] = [
+  {
+    id: "1",
+    name: "Quantum Coders",
+    description:
+      "A high-performing web development team specializing in React and Node.js applications with a focus on scalability and performance.",
+    category: "Web App Development",
+    coverImage: "/modern-fintech-dashboard.png",
+    rating: 4.9,
+    memberCount: 5,
+    projectsCompleted: 12,
+    successRate: 98,
+    isPremium: true,
+    institution: "Tech University",
+    // New fields
+    projectName: "FinFlow Dashboard",
+    area: "IT",
+    sector: "Fintech",
+    vertical: "Web App Development",
+    participationRate: 95,
+    quote: "We turn complex financial data into intuitive user experiences.",
+    stats: {
+      attendance: "98%",
+      feedback: "High",
+      synergy: "9.5",
+    },
+    members: [
+      { name: "Alex Johnson", role: "Frontend Lead", avatar: "/confident-businessman.png" },
+      { name: "Sarah Chen", role: "Backend Developer", avatar: "/confident-asian-professional.png" },
+      { name: "Miguel Rodriguez", role: "UI/UX Designer", avatar: "/confident-hispanic-professional.png" },
+      {
+        name: "Priya Patel",
+        role: "Full Stack Developer",
+        avatar: "/confident-indian-professional.png",
+      },
+      {
+        name: "James Wilson",
+        role: "DevOps Engineer",
+        avatar: "/confident-executive.png",
+      },
+    ],
+  },
+  {
+    id: "2",
+    name: "Mobile Mavericks",
+    description:
+      "Expert mobile development team with experience in React Native and Flutter, creating cross-platform applications with native performance.",
+    category: "Mobile Development",
+    coverImage: "/connected-health-apps.png",
+    rating: 4.7,
+    memberCount: 4,
+    projectsCompleted: 8,
+    successRate: 92,
+    isPremium: false,
+    // New fields
+    projectName: "HealthTrack Pro",
+    area: "IT",
+    sector: "Healthtech",
+    vertical: "Mobile Development",
+    participationRate: 88,
+    quote: "Building health apps that truly improve people's lives.",
+    stats: {
+      attendance: "92%",
+      feedback: "Medium",
+      synergy: "8.8",
+    },
+    members: [
+      {
+        name: "Emma Davis",
+        role: "Mobile Lead",
+        avatar: "/confident-professional-woman.png",
+      },
+      {
+        name: "David Kim",
+        role: "iOS Developer",
+        avatar: "/confident-asian-professional.png",
+      },
+      {
+        name: "Olivia Martinez",
+        role: "Android Developer",
+        avatar: "/confident-hispanic-professional.png",
+      },
+      {
+        name: "Raj Sharma",
+        role: "QA Engineer",
+        avatar: "/confident-indian-professional.png",
+      },
+    ],
+  },
+  {
+    id: "3",
+    name: "Blockchain Innovators",
+    description:
+      "Specialized in Web3 technologies, smart contracts, and decentralized applications with a strong focus on security and transparency.",
+    category: "Web3",
+    coverImage: "/interconnected-crypto-web3.png",
+    rating: 4.8,
+    memberCount: 6,
+    projectsCompleted: 5,
+    successRate: 95,
+    isPremium: true,
+    institution: "Crypto Academy",
+    // New fields
+    projectName: "SecureChain Wallet",
+    area: "IT",
+    sector: "Crypto",
+    vertical: "Web3",
+    participationRate: 92,
+    quote: "Revolutionizing finance through secure, decentralized solutions.",
+    stats: {
+      attendance: "95%",
+      feedback: "High",
+      synergy: "9.2",
+    },
+    members: [
+      {
+        name: "Daniel Lee",
+        role: "Blockchain Architect",
+        avatar: "/confident-asian-professional.png",
+      },
+      {
+        name: "Sophia Williams",
+        role: "Smart Contract Developer",
+        avatar: "/confident-professional-woman.png",
+      },
+      {
+        name: "Marcus Johnson",
+        role: "Frontend Developer",
+        avatar: "/confident-executive.png",
+      },
+      {
+        name: "Aisha Khan",
+        role: "Backend Developer",
+        avatar: "/confident-middle-eastern-professional.png",
+      },
+      { name: "Thomas Brown", role: "Security Specialist", avatar: "/confident-businessman.png" },
+      {
+        name: "Elena Petrova",
+        role: "QA Engineer",
+        avatar: "/confident-woman-portrait.png",
+      },
+    ],
+  },
+  {
+    id: "4",
+    name: "Data Wizards",
+    description:
+      "Machine learning and data science team specializing in predictive analytics, computer vision, and natural language processing solutions.",
+    category: "Machine Learning",
+    coverImage: "/retail-ml-insights.png",
+    rating: 4.6,
+    memberCount: 5,
+    projectsCompleted: 7,
+    successRate: 90,
+    isPremium: false,
+    institution: "Data Science Institute",
+    // New fields
+    projectName: "PredictX Analytics",
+    area: "Data",
+    sector: "Retail",
+    vertical: "Machine Learning",
+    participationRate: 85,
+    quote: "Turning data into actionable insights that drive business decisions.",
+    stats: {
+      attendance: "90%",
+      feedback: "Medium",
+      synergy: "8.5",
+    },
+    members: [
+      {
+        name: "Robert Zhang",
+        role: "ML Engineer Lead",
+        avatar: "/confident-asian-professional.png",
+      },
+      {
+        name: "Natalie Adams",
+        role: "Data Scientist",
+        avatar: "/confident-professional-woman.png",
+      },
+      {
+        name: "Omar Hassan",
+        role: "Computer Vision Specialist",
+        avatar: "/confident-executive.png",
+      },
+      { name: "Lisa Chen", role: "NLP Engineer", avatar: "/confident-asian-professional.png" },
+      {
+        name: "Kevin Park",
+        role: "Data Engineer",
+        avatar: "/confident-asian-professional.png",
+      },
+    ],
+  },
+  {
+    id: "5",
+    name: "UX Visionaries",
+    description:
+      "Product design team focused on creating intuitive, accessible, and engaging user experiences through research-driven design processes.",
+    category: "Product Design",
+    coverImage: "/connected-learning-journey.png",
+    rating: 4.9,
+    memberCount: 4,
+    projectsCompleted: 15,
+    successRate: 97,
+    isPremium: true,
+    // New fields
+    projectName: "EduLearn Platform",
+    area: "Product",
+    sector: "Edtech",
+    vertical: "Customer Experience",
+    participationRate: 98,
+    quote: "Designing educational experiences that inspire and engage learners.",
+    stats: {
+      attendance: "99%",
+      feedback: "Very High",
+      synergy: "9.8",
+    },
+    members: [
+      {
+        name: "Isabella Garcia",
+        role: "UX Lead",
+        avatar: "/confident-hispanic-professional.png",
+      },
+      {
+        name: "Jordan Taylor",
+        role: "UI Designer",
+        avatar: "/confident-professional.png",
+      },
+      {
+        name: "Zoe Williams",
+        role: "UX Researcher",
+        avatar: "/confident-professional-woman.png",
+      },
+      {
+        name: "Hiroshi Tanaka",
+        role: "Interaction Designer",
+        avatar: "/confident-japanese-businessman.png",
+      },
+    ],
+  },
+  {
+    id: "6",
+    name: "Content Creators",
+    description:
+      "Marketing team specializing in content strategy, SEO, social media management, and digital marketing campaigns with measurable results.",
+    category: "Content Marketing",
+    coverImage: "/connected-insurance-growth.png",
+    rating: 4.5,
+    memberCount: 3,
+    projectsCompleted: 20,
+    successRate: 88,
+    isPremium: false,
+    // New fields
+    projectName: "InsureTech Awareness",
+    area: "Marketing",
+    sector: "Insurtech",
+    vertical: "Content Marketing",
+    participationRate: 90,
+    quote: "Creating content that educates, engages, and converts.",
+    stats: {
+      attendance: "93%",
+      feedback: "High",
+      synergy: "8.9",
+    },
+    members: [
+      {
+        name: "Emily Wilson",
+        role: "Content Strategist",
+        avatar: "/confident-professional-woman.png",
+      },
+      { name: "Carlos Mendez", role: "SEO Specialist", avatar: "/confident-hispanic-professional.png" },
+      { name: "Grace Kim", role: "Social Media Manager", avatar: "/confident-asian-professional.png" },
+    ],
+  },
+]
