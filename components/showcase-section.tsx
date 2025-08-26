@@ -9,7 +9,7 @@ import { ChevronRight, ArrowLeft } from "lucide-react"
 // JSON local
 import rawTeams from "@/app/data/teams.json"
 
-const DEFAULT_COVER = "/Healthtech.png"
+const DEFAULT_COVER = "/placeholder-logo.png"
 const PLACEHOLDER_AVATAR = "/placeholder-user.jpg"
 
 const RANDOM_POOL_IDS = [10, 11, 13, 14, 15]
