@@ -1,0 +1,1194 @@
+[
+    {
+  "id": 1,
+  "name": "Justina.io",
+  "company": "NoCountry",
+  "description": "Justina.io es un sistema integral y altamente seguro que facilita la gestión y coordinación en torno a la donación de órganos y la atención médica. Este MVP está orientado a brindar una solución efectiva para conectar a pacientes, doctores, laboratorios, financiadores, instituciones y usuarios, de manera que podamos facilitar el proceso de donación y tratamiento médico integral",
+  "sector":"HealthTech",
+  "tools": ["Trello", "Postman", "Cloudinary"],
+  "skillNames": ["Java", "Spring", "JavaScript", "React", "Docker", "Tailwindcss"],
+  "tags": ["HealthTech", "Java", "Spring", "React", "Web/App"],
+  "dataTime":"17/6/2024",
+  "portada": "",
+  "members": [
+    {
+      "id": 1,
+      "name": "Diego G.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 16,
+      "rating": 89
+    },
+    {
+      "id": 2,
+      "name": "Yosmarli P.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 16,
+      "rating": 87
+    },
+    {
+      "id": 3,
+      "name": "Valerie R.",
+      "country": "Panama",
+      "role": "Back End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/129791003?v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": 89
+    },
+    {
+      "id": 4,
+      "name": "Matías A.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 20,
+      "rating": 96
+    },
+    {
+      "id": 5,
+      "name": "Lisandro A.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "https://la-proyectos.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fa0ee3136-c34f-406e-b7d0-f0a34e9c1a61%2F310e994a-644f-47f2-860e-55a2d9ed9cca%2FWhatsApp_Image_2024-02-29_at_16.01.07.jpeg?table=block&id=f476aeb0-7dd0-418c-ba3c-d03040f356ef&spaceId=a0ee3136-c34f-406e-b7d0-f0a34e9c1a61&width=480&userId=&cache=v2",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 12,
+      "rating": 95
+    },
+     {
+      "id": 6,
+      "name": "Camilo M.",
+      "country": "Colombia",
+      "role": "Front End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 16,
+      "rating": 87
+    }, {
+      "id": 7,
+      "name": "Facundo B.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 89
+    }
+    , {
+      "id": 8,
+      "name": "Cynthia O.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 90
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 8 },
+    { "label": "Entregables totales", "value": 5 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 2,
+  "name": "Waki",
+  "company": "NoCountry",
+  "description": "Waki te permite convertirte en un verdadero fanático del fútbol y obtener recompensas por tus conocimientos. Predice resultados, completa desafíos y escala posiciones en nuestro ranking para ganar puntos y obtener tokens de tus jugadores favoritos.",
+  "sector":"SportsTech",
+  "tags": ["SportsTech", "Mobile"],
+  "tools": [""],
+  "skillNames": ["Python", "Django", "JavaScript", "React", "i18next", "Tailwindcss"],
+  "dataTime":"23/9/2024",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Diego G.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 16,
+      "rating": 89
+    },
+    {
+      "id": 2,
+      "name": "Gabriela P.",
+      "country": "Venezuela",
+      "role": "Front-End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFPvJcrInCvZQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1686009652482?e=1758153600&v=beta&t=OXbZNoHSs9vTo6ohZ-l6kF6IJFgNy0uOFsXZ-BKJ6y0",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 53,
+      "rating": 90
+    },
+    {
+      "id": 3,
+      "name": "Sofía Á",
+      "country": "Guatemala",
+      "role": "UX/UI",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 8,
+      "rating": 86
+    },
+    {
+      "id": 4,
+      "name": "Vivian R.",
+      "country": "Chile",
+      "role": "UX/UI",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 81
+    },
+    {
+      "id": 5,
+      "name": "Maria B.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQFg1vMnZ79Wsw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1682262728491?e=1758758400&v=beta&t=0gfBA_fwcHWM046t4xKQvszYRaqaoDanke-QjZotcVY",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 12,
+      "rating": 90
+    },
+     {
+      "id": 6,
+      "name": "Roger P.",
+      "country": "Argentina",
+      "role": "Project Manager",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 20,
+      "rating": 72
+    }, {
+      "id": 7,
+      "name": "Fernando S.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 12,
+      "rating": 90
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 7 },
+    { "label": "Entregables totales", "value": "-" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+}
+,
+{
+  "id": 3,
+  "name": "Bookie",
+  "company": "NoCountry",
+  "description": "Bookie es una aplicación Android desarrollada con Flutter que permite a los usuarios sumergirse en relatos de una manera única mediante su dispositivo movil, la particularidad de Bookie es que cada cápitulo de los relatos estarán asociados a una locación específica a la cual el lector debe concurrir para desbloquear, lo que permite al usuario experimentar el entorno real del texto, y de esta manera sumergirse plenamente en la historia. A su vez, escritores aficionados podrán crear sus propios relatos vinculados con escenarios de su elección, tambien podrán contar con la asistencia de IA para el desarrollo de historias.",
+  "sector":"EdTech",
+  "tags": ["EdTech", "Mobile", "NoCode","Flutter"],
+  "tools": [""],
+  "skillNames": ["Flutter", "Dart", "Java", "Spring"],
+  "dataTime":"11/11/2024",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Walter M.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQHdZM2xplwBcQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1723782950471?e=1758758400&v=beta&t=otIp9iIDHx7-cENSjumKJMDYk1q9Ou0N0wZg2qFwGCE",
+      "entregables": "-",
+      "reviews": 8,
+      "rating": 88
+    },
+    {
+      "id": 2,
+      "name": "Luis Angel G.",
+      "country": "Peru",
+      "role": "Mobile developer",
+      "avatarUrl": "https://portfolio-lgdev.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdlixnwuhi%2Fimage%2Fupload%2Fv1729230523%2Fkfd8ihshe8szgzhfyyiv.webp&w=1080&q=75",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 24,
+      "rating": 88
+    },
+    {
+      "id": 3,
+      "name": "Diego A.",
+      "country": "Colombia",
+      "role": "UX/UI",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 20,
+      "rating": 80
+    },
+    {
+      "id": 4,
+      "name": "Lionel S.",
+      "country": "Colombia",
+      "role": "Back End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFYiRx_d7ttow/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1668836994983?e=1758758400&v=beta&t=9QcMnBqUjbi739FhVeaZAdDSEpCcbm3XTxVuuY-bvp0",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 20,
+      "rating": 86
+    },
+    {
+      "id": 5,
+      "name": "Facundo A.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 24,
+      "rating": 92
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 5 },
+    { "label": "Entregables totales", "value": "-" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 4,
+  "name": "Financia",
+  "company": "NoCountry",
+  "description": "Generar un impacto social relevante. Ante la falta de opciones de crédito accesible, ofrecemos a las familias la posibilidad de adquirir un terreno donde construir su hogar. Al mismo tiempo, proporcionamos a quienes tienen capacidad de ahorro una forma de invertir sus fondos en un activo de sólida revalorización a mediano plazo.",
+  "sector":"Fintech",
+  "tags": ["Fintech", "Web/App"],
+  "tools": ["Adobe ai"],
+  "skillNames": ["Python", "Django", "JavaScript", "React"],
+  "dataTime":"21/11/2024",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Marcelo P.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": 20,
+      "rating": 88
+    },
+    {
+      "id": 2,
+      "name": "Leon A.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/128533111?v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": "-"
+    },
+    {
+      "id": 3,
+      "name": "Tania S.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/134714893?s=64&v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": "-"
+    },
+    {
+      "id": 4,
+      "name": "Rodrigo R.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/122314817?s=64&v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": "-",
+      "rating": "-"
+    },
+    {
+      "id": 5,
+      "name": "Edivaldo G",
+      "country": "España",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/34548938?v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": "-",
+      "rating": "-"
+    },
+     {
+      "id": 6,
+      "name": "Jorge H. N.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/112107967?s=64&v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": "-",
+      "rating": "-"
+    }, {
+      "id": 7,
+      "name": "Juan N.",
+      "country": "Colombia",
+      "role": "Back End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": "-",
+      "rating": "-"
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 7 },
+    { "label": "Entregables totales", "value": "7" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+} ,
+{
+  "id": 5,
+  "name": "KlowHub",
+  "company": "NoCountry",
+  "description": "Este proyecto nace de la necesidad de emprendedores locales de vender y hacer conocer sus productos a todos los vecinos de su comunidad. La página web se ecarga de mostrar las diferentes tiendas de cada vededor con su mercaderia correspondiente para que cada cliente pueda dirigirse de manera sencilla al producto o vendedor deseado.",
+  "sector":"SaaS",
+  "tags": ["FintSaaS", "Web/App"],
+  "tools": ["Cloudinary", "Amazon web service"],
+  "skillNames": ["NestJS", "TypeORM", "JavaScript", "NextJs"],
+  "dataTime":"21/11/2024",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Marcelo P.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": 20,
+      "rating": 88
+    },
+    {
+      "id": 2,
+      "name": "Thomas L.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/114096053?v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": "12",
+      "rating": 86
+    },
+    {
+      "id": 3,
+      "name": "Martín K.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/134714893?s=64&v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 44,
+      "rating": 91
+    },
+    {
+      "id": 4,
+      "name": "Lucero F.",
+      "country": "Peru",
+      "role": "UX/UI",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQEBZxcj2YBB1w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1703251698222?e=1758758400&v=beta&t=-utFVqpN9yQk8cHeD5S_-tNalMILizabZ1bKUv0o7Tg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 14,
+      "rating": 86
+    },
+    {
+      "id": 5,
+      "name": "Joel L.",
+      "country": "Peru",
+      "role": "Front End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQHQRlXiOttnEQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1665171329865?e=1758758400&v=beta&t=qrGY8d-qW3GoRRROOpgw_AUIMpbhPBJcmijHHgZPiN0",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":8,
+      "rating": 97
+    },
+     {
+      "id": 6,
+      "name": "Javier C.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1612753310949?e=1758758400&v=beta&t=a-Z6YcTKR_LaeUaiva6q5lC1SBCmJaM_F_DP4Ybg6SM",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 93
+    }, {
+      "id": 7,
+      "name": "Franco G.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/99786651?v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 96
+    }, {
+      "id": 8,
+      "name": "Fernando L.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 98
+    }, {
+      "id": 9,
+      "name": "Carolina S",
+      "country": "Argentina",
+      "role": "Project Manager",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/40846991?v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 24,
+      "rating": 79
+    }, {
+      "id": 10,
+      "name": "Benjamín C.",
+      "country": "Nicaragua",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/106096245?v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 8,
+      "rating": 92
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 10 },
+    { "label": "Entregables totales", "value": "3" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+ } ,
+{
+  "id": 6,
+  "name": "Open Lab",
+  "company": "NoCountry",
+  "description": "Openlab is a collaborative platform for the creation of startups, facilitated by DAO's (Decentralized Autonomous Organizations) and the use of tokens linked to intellectual property. Through this platform, users can interact with initiatives, buy and sell tokens, and participate in the creation of new business opportunities. The system seeks to promote transparency and meritocracy in the startup ecosystem.",
+  "sector":"SaaS",
+  "tags": ["Web/App"],
+  "tools": [""],
+  "skillNames": ["Java", "Spring", "JavaScript", "React"],
+  "dataTime":"",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Leonardo C.",
+      "country": "Colombia",
+      "role": "Team Leader",
+      "avatarUrl": "https://camo.githubusercontent.com/fae8fc6206b6a070b02f807e7422827eb8e41e91a606f6052d1993c698cd3dea/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d31624b6b3235674257352d4b647353577a6c3442326736384e2d74716232486a6a",
+      "entregables": "-",
+      "reviews": 5,
+      "rating": 98
+    },
+    {
+      "id": 2,
+      "name": "Jairo S.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "https://camo.githubusercontent.com/c7a0101bb53bd276360bb9d3d5b9a466d640183a7cf7b3ba14460c9cd5248017/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d31683745746c59316d6f68494c553837366c6f2d6f762d33564463334d6a6a6f79",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 12,
+      "rating": 78
+    },
+    {
+      "id": 3,
+      "name": "José S.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://camo.githubusercontent.com/977e6741972d1633b1d416dd8b94ffe5c397f2e91e216943c31ec8c478469b0c/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d314a502d49517347643376784d7a52416e41696f514f71622d4e47686272735369",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 12,
+      "rating": 82
+    },
+    {
+      "id": 4,
+      "name": "Cristian G.",
+      "country": "Argentina",
+      "role": "Back End",
+      "avatarUrl": "https://camo.githubusercontent.com/977e6741972d1633b1d416dd8b94ffe5c397f2e91e216943c31ec8c478469b0c/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d314a502d49517347643376784d7a52416e41696f514f71622d4e47686272735369",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 25,
+      "rating": 90
+    },
+    {
+      "id": 5,
+      "name": "Bárbara E.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://camo.githubusercontent.com/7fe9be7af52977a5c46f138f11225d27283c161d304cec31a1b6a7d5a40b9dd2/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d316f436962712d484d7a634339666c44536d765773515a587a7752574853446165",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":21,
+      "rating": 79
+    },
+     {
+      "id": 6,
+      "name": "Abel A.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://camo.githubusercontent.com/fb6b5f40752b15fb6440a61ab0355f4c7f475590435e553eb1e95c86d93228ba/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d31454765745771623258634f4976305f42716366685558455f6439347747354d72",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 23,
+      "rating": 97
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 6 },
+    { "label": "Entregables totales", "value": "-" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+}
+,
+{
+  "id": 7,
+  "name": "VocalTech",
+  "company": "NoCountry",
+  "description": "Permite promocionar productos o servicios mediante una landing donde los usuarios completan un diagnóstico inicial. A partir de ese diagnóstico, los contactos ingresan automáticamente a un sistema de seguimiento que centraliza la información y gestiona su evolución en el CRM.",
+  "tags": ["Web/App", "CRM"],
+  "sector":"Servicios",
+  "tools": [""],
+  "skillNames": ["NextJs", "NodeJS", "JavaScript", "React"],
+  "dataTime":"01/02/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Hernan C.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": 24,
+      "rating": 85
+    },
+    {
+      "id": 2,
+      "name": "Martín K.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/134714893?s=64&v=4",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 44,
+      "rating": 91
+    },
+    {
+      "id": 3,
+      "name": "Santiago M.",
+      "country": "Ecuador",
+      "role": "Front End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 6,
+      "rating": 98
+    },
+    {
+      "id": 4,
+      "name": "Juan P.",
+      "country": "Colombia",
+      "role": "Back End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQHTZCTVfWcrGg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714778333163?e=1758758400&v=beta&t=ebxS9ceH-bMCbm65I1GsD2i2bXWwSPsP4ACfPmahHQ4",
+      "entregables": "-" ,
+      "reviews": 16,
+      "rating": 97
+    },
+    {
+      "id": 5,
+      "name": "Gabriela A.",
+      "country": "España",
+      "role": "Front End",
+      "avatarUrl": "https://camo.githubusercontent.com/7fe9be7af52977a5c46f138f11225d27283c161d304cec31a1b6a7d5a40b9dd2/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d316f436962712d484d7a634339666c44536d765773515a587a7752574853446165",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":21,
+      "rating": 93
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 5 },
+    { "label": "Entregables totales", "value": "-" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 8,
+  "name": "IUPI",
+  "company": "NoCountry",
+  "description": "IUPI es una aplicación diseñada para incluir financieramente a la población argentina en un contexto económico complejo y cambiante. Nuestra plataforma brinda herramientas intuitivas y accesibles que facilitan el ahorro y la inversión para personas de diferentes edades y niveles de experiencia.",
+  "sector":"Fintech",
+  "tags": ["Mobile", "Machine Learning"],
+  "tools": ["Thymeleaf","Figma"],
+  "skillNames": ["Java", "Spring", "Thymeleaf", "TypeScript"],
+  "dataTime":"01/02/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Orlando F.",
+      "country": "Bolivia",
+      "role": "Team Leader",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": 13,
+      "rating": 92
+    },
+    {
+      "id": 2,
+      "name": "Nico I",
+      "country": "Mexico",
+      "role": "Backk End",
+      "avatarUrl": "public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 11,
+      "rating": 85
+    },
+    {
+      "id": 3,
+      "name": "Lionel S.",
+      "country": "Colombia",
+      "role": "Back End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFYiRx_d7ttow/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1668836994983?e=1758758400&v=beta&t=9QcMnBqUjbi739FhVeaZAdDSEpCcbm3XTxVuuY-bvp0",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 20,
+      "rating": 86
+    },
+    {
+      "id": 4,
+      "name": "Jefferson P.",
+      "country": "Ecuador",
+      "role": "Front End",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/63021907?v=4",
+      "reviews": 22,
+      "rating": 91
+    },
+    {
+      "id": 5,
+      "name": "Agostina R.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07A1QAGMUY-e35c8dc7c8d6-192",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":25,
+      "rating": 84
+    },
+    {
+      "id": 6,
+      "name": "Claudia S.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQFJzWZA42vU5w/profile-displayphoto-scale_200_200/B4DZe4bMj4G8AY-/0/1751145827265?e=1758758400&v=beta&t=OT0n7oGVjAMsgOggdKnahC_iunvSZ_GJ6RVR6ihau64",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":14,
+      "rating": 93
+    },
+    {
+      "id": 7,
+      "name": "Juan C.",
+      "country": "Peru",
+      "role": "Data Scientist",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/67085586?v=4",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":76,
+      "rating": 85
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 7 },
+    { "label": "Entregables totales", "value": 4 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},{
+  "id": 9,
+  "name": "Web + Brading + CRM Healthtech ",
+  "company": "NoCountry",
+  "description": "Experiencia digital personalizada para profesionales, instituciones y usuarios individuales.",
+  "sector":"HealthTech",
+  "tags": ["Web/app", "Branding", "CRM", "HealthTech"],
+  "tools": [""],
+  "skillNames": ["Python", "Django", "JavaScript", "NextJs"],
+  "dataTime":"01/07/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Gabriela A.",
+      "country": "España",
+      "role": "Front End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/C4E03AQGnVa3inxOmAQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1554412765881?e=1758153600&v=beta&t=vNdYaBU9IwkwAGleWAeoB2t6TngHqd4P4SPRmU2au7o",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":21,
+      "rating": 93
+    },
+    {
+      "id": 2,
+      "name": "Gabriela P.",
+      "country": "Venezuela",
+      "role": "Front-End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFPvJcrInCvZQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1686009652482?e=1758153600&v=beta&t=OXbZNoHSs9vTo6ohZ-l6kF6IJFgNy0uOFsXZ-BKJ6y0",
+      "actividadHoras": "-",
+      "entregables": "-",
+      "reviews": 53,
+      "rating": 90
+    },
+    {
+      "id": 3,
+      "name": "Sebastian T.",
+      "country": "Argentina",
+      "role": "Front End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQF2TEbW4kF6ww/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727481530262?e=1758153600&v=beta&t=IJnux2u4bchYzWL6kcZipb4EH3X1vqX19EWzLg7Tq5s",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews": 13,
+      "rating": 87
+    },
+    {
+      "id": 4,
+      "name": "Rene S.",
+      "country": "Mexico",
+      "role": "Back End",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U03PC70N5RS-5353125861c7-192",
+      "reviews": 166,
+      "rating": 95
+    },
+    {
+      "id": 5,
+      "name": "Agostina R.",
+      "country": "Argentina",
+      "role": "QA Tester",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07A1QAGMUY-e35c8dc7c8d6-192",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":25,
+      "rating": 84
+    },
+    {
+      "id": 6,
+      "name": "Pablo S.",
+      "country": "Mexico",
+      "role": "Back End",
+      "avatarUrl": "/public/placeholder-user.jpg",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":5,
+      "rating": 68
+    },
+    {
+      "id": 7,
+      "name": "Fernando V.",
+      "country": "Peru",
+      "role": "UX/UI",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U05PVFR05BP-fdcf5382ab34-192",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":10,
+      "rating": 94
+    },
+    {
+      "id":8,
+      "name": "Lucas S.",
+      "country": "Argentina",
+      "role": "Project Manager",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07NA3EH5AB-1d01ec9be286-192",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":9,
+      "rating": 87
+    }
+    ,
+    {
+      "id": 9,
+      "name": "Allan M.",
+      "country": "Chile",
+      "role": "Back End",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQG_RQU2qbPq7g/profile-displayphoto-shrink_400_400/B4DZf85wcxHkAg-/0/1752294688923?e=1758153600&v=beta&t=pmpxNfnvrCCeDGqsMOr_O6YyZjnBafUyoHtNuH7bYXM",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":10,
+      "rating": 80
+    }
+    ,
+    {
+      "id": 10,
+      "name": "Diego Y.",
+      "country": "Argentina",
+      "role": "UX/UI",
+      "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQFhJAw8JlVz7w/profile-displayphoto-crop_800_800/B4DZjNrTOoGgAI-/0/1755797339366?e=1758758400&v=beta&t=EODsU-uTh1WfDOhFbIZuETV36ZsWTGvnZhiQXH_pZ4A",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":9,
+      "rating": 78
+    },
+    {
+      "id": 11,
+      "name": "Matías B.",
+      "country": "Argentina",
+      "role": "Team Leader",
+      "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-192",
+      "actividadHoras": "-",
+      "entregables": "-" ,
+      "reviews":93,
+      "rating": 96
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 11 },
+    { "label": "Entregables totales", "value": 4 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+} ,
+{
+  "id": 10,
+  "name": "404NotFounders  - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["Fintech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Leopoldo M.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": "9",
+      "reviews": 1,
+      "rating": 100
+    },
+    {
+      "id": 2,
+      "name": "Bryan M.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 9,
+      "reviews": 1,
+      "rating": 100
+    },
+    {
+      "id": 3,
+      "name": "Gonzalo D.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 9,
+      "reviews": 2,
+      "rating": 81
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 3 },
+    { "label": "Entregables totales", "value": 9 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 11,
+  "name": "VIESSAN - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["Fintech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Robert E.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": "-"
+    },
+    {
+      "id": 2,
+      "name": "Gabriel V.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": "-"
+    },
+    {
+      "id": 3,
+      "name": "Anthony S.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": "-",
+      "reviews": "-",
+      "rating": "-"
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": "3" },
+    { "label": "Entregables totales", "value": "6" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 12,
+  "name": "JADai - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["Fintech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Jandony G.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 3,
+      "reviews": 2,
+      "rating": 100
+    },
+    {
+      "id": 2,
+      "name": "David S.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 3,
+      "reviews": 1,
+      "rating": 100
+    },
+    {
+      "id": 3,
+      "name": "Luis C.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 3,
+      "reviews": 2,
+      "rating": 100
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": "3" },
+    { "label": "Entregables totales", "value": "3" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 13,
+  "name": "ian - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["GovTech", "LegalTech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Luis V.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 4,
+      "reviews": 3,
+      "rating": 94
+    },
+    {
+      "id": 2,
+      "name": "Raúl V.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": "4",
+      "reviews": "3",
+      "rating": 100
+    },
+    {
+      "id": 3,
+      "name": "Elian M.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 4,
+      "reviews": 3,
+      "rating": 95
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": "3" },
+    { "label": "Entregables totales", "value": "4" },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+}
+,
+{
+  "id": 14,
+  "name": "Silicon UPS - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["GovTech", "LegalTech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Kevin C.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 5,
+      "reviews": 2,
+      "rating": 95
+    },
+    {
+      "id": 2,
+      "name": "Ronny R.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 5,
+      "reviews":2,
+      "rating": 95
+    },
+    {
+      "id": 3,
+      "name": "Lenin L.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 5,
+      "reviews": 1,
+      "rating": 92
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 3 },
+    { "label": "Entregables totales", "value": 5 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+},
+{
+  "id": 15,
+  "name": "AI 404 - HackIAthon",
+  "company": "NoCountry",
+  "description": "Evaluación Inteligente de Riesgo Financiero para PYMEs Solución de IA para evaluar riesgo financiero de PYMEs con datos alternativos, facilitando acceso al crédito y optimizando decisiones de instituciones financieras.",
+  "sector":"Software factory",
+  "tags": ["GovTech", "LegalTech", "AI"],
+  "tools": [""],
+  "skillNames": [""],
+  "dataTime":"1/8/2025",
+  "portada":"",
+  "members": [
+    {
+      "id": 1,
+      "name": "Cristian P.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 1,
+      "reviews": 2,
+      "rating": 92
+    },
+    {
+      "id": 2,
+      "name": "Natalia M.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 1,
+      "reviews": 3,
+      "rating": 85
+    },
+    {
+      "id": 3,
+      "name": "Williams M.",
+      "country": "Ecuador",
+      "role": "AI Engineer",
+      "avatarUrl": "/placeholder-user.jpg",
+      "entregables": 1,
+      "reviews": 2,
+      "rating": 73
+    }
+  ],
+  "metrics": [
+    { "label": "Tamaño de equipo", "value": 3 },
+    { "label": "Entregables totales", "value": 1 },
+    { "label": "Reuniones totales", "value": "-" },
+    { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
+  ]
+}
+]
