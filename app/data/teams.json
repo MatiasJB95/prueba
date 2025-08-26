@@ -18,7 +18,7 @@
       "role": "Team Leader",
       "avatarUrl": "/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables":  5 ,
       "reviews": 16,
       "rating": 89
     },
@@ -29,7 +29,7 @@
       "role": "QA Tester",
       "avatarUrl": "/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables":  5 ,
       "reviews": 16,
       "rating": 87
     },
@@ -40,7 +40,7 @@
       "role": "Back End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/129791003?v=4",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables":  5 ,
       "reviews": "-",
       "rating": 89
     },
@@ -51,7 +51,7 @@
       "role": "Back End",
       "avatarUrl": "/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables":  5 ,
       "reviews": 20,
       "rating": 96
     },
@@ -62,7 +62,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://la-proyectos.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fa0ee3136-c34f-406e-b7d0-f0a34e9c1a61%2F310e994a-644f-47f2-860e-55a2d9ed9cca%2FWhatsApp_Image_2024-02-29_at_16.01.07.jpeg?table=block&id=f476aeb0-7dd0-418c-ba3c-d03040f356ef&spaceId=a0ee3136-c34f-406e-b7d0-f0a34e9c1a61&width=480&userId=&cache=v2",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables":  5 ,
       "reviews": 12,
       "rating": 95
     },
@@ -73,7 +73,7 @@
       "role": "Front End",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables":  5 ,
       "reviews": 16,
       "rating": 87
     }, {
@@ -83,7 +83,7 @@
       "role": "Front End",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables":  5 ,
       "reviews": 8,
       "rating": 89
     }
@@ -94,7 +94,7 @@
       "role": "UX/UI",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables":  5 ,
       "reviews": 8,
       "rating": 90
     }
@@ -295,7 +295,7 @@
       "country": "Argentina",
       "role": "Team Leader",
       "avatarUrl": "/public/placeholder-user.jpg",
-      "entregables": "-",
+      "entregables": 7,
       "reviews": 20,
       "rating": 88
     },
@@ -306,7 +306,7 @@
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/128533111?v=4",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     },
@@ -317,7 +317,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://avatars.githubusercontent.com/u/134714893?s=64&v=4",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     },
@@ -328,7 +328,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://avatars.githubusercontent.com/u/122314817?s=64&v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     },
@@ -339,7 +339,7 @@
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/34548938?v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     },
@@ -350,7 +350,7 @@
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/112107967?s=64&v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     }, {
@@ -360,14 +360,14 @@
       "role": "Back End",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 7,
       "reviews": "-",
       "rating": "-"
     }
   ],
   "metrics": [
     { "label": "Tamaño de equipo", "value": 7 },
-    { "label": "Entregables totales", "value": "7" },
+    { "label": "Entregables totales", "value":7 },
     { "label": "Reuniones totales", "value": "-" },
     { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
   ]
@@ -390,7 +390,7 @@
       "country": "Argentina",
       "role": "Team Leader",
       "avatarUrl": "/public/placeholder-user.jpg",
-      "entregables": "-",
+      "entregables": 3 ,
       "reviews": 20,
       "rating": 88
     },
@@ -401,7 +401,7 @@
       "role": "Back End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/114096053?v=4",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 3 ,
       "reviews": "12",
       "rating": 86
     },
@@ -412,7 +412,7 @@
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/134714893?s=64&v=4",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 3 ,
       "reviews": 44,
       "rating": 91
     },
@@ -423,7 +423,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQEBZxcj2YBB1w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1703251698222?e=1758758400&v=beta&t=-utFVqpN9yQk8cHeD5S_-tNalMILizabZ1bKUv0o7Tg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 14,
       "rating": 86
     },
@@ -434,7 +434,7 @@
       "role": "Front End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQHQRlXiOttnEQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1665171329865?e=1758758400&v=beta&t=qrGY8d-qW3GoRRROOpgw_AUIMpbhPBJcmijHHgZPiN0",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews":8,
       "rating": 97
     },
@@ -445,7 +445,7 @@
       "role": "Back End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1612753310949?e=1758758400&v=beta&t=a-Z6YcTKR_LaeUaiva6q5lC1SBCmJaM_F_DP4Ybg6SM",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 8,
       "rating": 93
     }, {
@@ -455,7 +455,7 @@
       "role": "Back End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/99786651?v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 8,
       "rating": 96
     }, {
@@ -465,7 +465,7 @@
       "role": "QA Tester",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 8,
       "rating": 98
     }, {
@@ -475,7 +475,7 @@
       "role": "Project Manager",
       "avatarUrl": "https://avatars.githubusercontent.com/u/40846991?v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 24,
       "rating": 79
     }, {
@@ -485,14 +485,14 @@
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/106096245?v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 3 ,
       "reviews": 8,
       "rating": 92
     }
   ],
   "metrics": [
     { "label": "Tamaño de equipo", "value": 10 },
-    { "label": "Entregables totales", "value": "3" },
+    { "label": "Entregables totales", "value": 3 },
     { "label": "Reuniones totales", "value": "-" },
     { "label": "Tiempo total simulado", "value": "-", "sublabel": "horas" }
   ]
@@ -674,7 +674,7 @@
       "country": "Bolivia",
       "role": "Team Leader",
       "avatarUrl": "/public/placeholder-user.jpg",
-      "entregables": "-",
+      "entregables": 4 ,
       "reviews": 13,
       "rating": 92
     },
@@ -685,7 +685,7 @@
       "role": "Backk End",
       "avatarUrl": "public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 4 ,
       "reviews": 11,
       "rating": 85
     },
@@ -696,7 +696,7 @@
       "role": "Back End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFYiRx_d7ttow/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1668836994983?e=1758758400&v=beta&t=9QcMnBqUjbi739FhVeaZAdDSEpCcbm3XTxVuuY-bvp0",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews": 20,
       "rating": 86
     },
@@ -706,6 +706,7 @@
       "country": "Ecuador",
       "role": "Front End",
       "avatarUrl": "https://avatars.githubusercontent.com/u/63021907?v=4",
+      "entregables": 4 ,
       "reviews": 22,
       "rating": 91
     },
@@ -716,7 +717,7 @@
       "role": "QA Tester",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07A1QAGMUY-e35c8dc7c8d6-192",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":25,
       "rating": 84
     },
@@ -727,7 +728,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQFJzWZA42vU5w/profile-displayphoto-scale_200_200/B4DZe4bMj4G8AY-/0/1751145827265?e=1758758400&v=beta&t=OT0n7oGVjAMsgOggdKnahC_iunvSZ_GJ6RVR6ihau64",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":14,
       "rating": 93
     },
@@ -738,7 +739,7 @@
       "role": "Data Scientist",
       "avatarUrl": "https://avatars.githubusercontent.com/u/67085586?v=4",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":76,
       "rating": 85
     }
@@ -768,7 +769,7 @@
       "role": "Front End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/C4E03AQGnVa3inxOmAQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1554412765881?e=1758153600&v=beta&t=vNdYaBU9IwkwAGleWAeoB2t6TngHqd4P4SPRmU2au7o",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":21,
       "rating": 93
     },
@@ -779,7 +780,7 @@
       "role": "Front-End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4E03AQFPvJcrInCvZQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1686009652482?e=1758153600&v=beta&t=OXbZNoHSs9vTo6ohZ-l6kF6IJFgNy0uOFsXZ-BKJ6y0",
       "actividadHoras": "-",
-      "entregables": "-",
+      "entregables": 4 ,
       "reviews": 53,
       "rating": 90
     },
@@ -790,7 +791,7 @@
       "role": "Front End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQF2TEbW4kF6ww/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727481530262?e=1758153600&v=beta&t=IJnux2u4bchYzWL6kcZipb4EH3X1vqX19EWzLg7Tq5s",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews": 13,
       "rating": 87
     },
@@ -800,6 +801,8 @@
       "country": "Mexico",
       "role": "Back End",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U03PC70N5RS-5353125861c7-192",
+      "actividadHoras": "-",
+      "entregables": 4 ,
       "reviews": 166,
       "rating": 95
     },
@@ -810,7 +813,7 @@
       "role": "QA Tester",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07A1QAGMUY-e35c8dc7c8d6-192",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":25,
       "rating": 84
     },
@@ -821,7 +824,7 @@
       "role": "Back End",
       "avatarUrl": "/public/placeholder-user.jpg",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":5,
       "rating": 68
     },
@@ -832,7 +835,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U05PVFR05BP-fdcf5382ab34-192",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":10,
       "rating": 94
     },
@@ -843,7 +846,7 @@
       "role": "Project Manager",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U07NA3EH5AB-1d01ec9be286-192",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":9,
       "rating": 87
     }
@@ -855,7 +858,7 @@
       "role": "Back End",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQG_RQU2qbPq7g/profile-displayphoto-shrink_400_400/B4DZf85wcxHkAg-/0/1752294688923?e=1758153600&v=beta&t=pmpxNfnvrCCeDGqsMOr_O6YyZjnBafUyoHtNuH7bYXM",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":10,
       "rating": 80
     }
@@ -867,7 +870,7 @@
       "role": "UX/UI",
       "avatarUrl": "https://media.licdn.com/dms/image/v2/D4D03AQFhJAw8JlVz7w/profile-displayphoto-crop_800_800/B4DZjNrTOoGgAI-/0/1755797339366?e=1758758400&v=beta&t=EODsU-uTh1WfDOhFbIZuETV36ZsWTGvnZhiQXH_pZ4A",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":9,
       "rating": 78
     },
@@ -878,7 +881,7 @@
       "role": "Team Leader",
       "avatarUrl": "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-192",
       "actividadHoras": "-",
-      "entregables": "-" ,
+      "entregables": 4 ,
       "reviews":93,
       "rating": 96
     }

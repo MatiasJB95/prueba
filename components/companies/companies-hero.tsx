@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { Upload, Play, CheckCircle, Unlock, Users, Activity, GraduationCap, Star } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useState, useEffect } from "react"
 
 export function CompaniesHero() {
@@ -22,21 +23,22 @@ export function CompaniesHero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSentence((prev) => (prev + 1) % sentences.length)
-    }, 3000) // Change sentence every 3 seconds
-
+    }, 3000)
     return () => clearInterval(interval)
   }, [sentences.length])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-transparent">
+      {/* quitamos el tinte violeta del fondo base */}
+
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Nebula-like gradients */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-purple-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-gradient-radial from-pink-500/15 via-purple-500/8 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-radial from-cyan-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+        {/* Nebulas SIN violeta/rosa */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-cyan-400/15 via-blue-500/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-80 h-80 bg-gradient-radial from-blue-400/10 via-cyan-500/8 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-radial from-cyan-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl" />
 
-        {/* Animated stars */}
+        {/* Stars */}
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
@@ -46,15 +48,8 @@ export function CompaniesHero() {
               left: `${Math.random() * 100}%`,
               background: ["#ffffff", "#60a5fa", "#a78bfa", "#34d399", "#fbbf24", "#f472b6"][i % 6],
             }}
-            animate={{
-              opacity: [0.3, 1, 0.3],
-              scale: [0.5, 1.2, 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
-            }}
+            animate={{ opacity: [0.3, 1, 0.3], scale: [0.5, 1.2, 0.5] }}
+            transition={{ duration: Math.random() * 3 + 2, repeat: Number.POSITIVE_INFINITY, delay: Math.random() * 2 }}
           />
         ))}
       </div>
@@ -104,29 +99,29 @@ export function CompaniesHero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-4 justify-center lg:justify-center">
-              <Button
-                size="default"
-                className="gradient-bg px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={() => window.open("https://tally.so/r/3EEp02", "_blank")}
-              >
-                <Upload className="mr-2 h-4 w-4" />
-                Subí tu proyecto
-              </Button>
+<div className="flex flex-col sm:flex-row gap-3 mb-4 justify-center lg:justify-center">
+  <Button
+    size="default"
+    className="!rounded-none gradient-bg px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300"
+    onClick={() => window.open("https://tally.so/r/3EEp02", "_blank")}
+  >
+    <Upload className="mr-2 h-4 w-4" />
+    Subí tu proyecto
+  </Button>
 
-              <Button
-                size="default"
-                variant="outline"
-                className="px-6 py-2.5 bg-background/50 backdrop-blur-sm border-primary/20 hover:bg-primary/5"
-                onClick={() => window.open("https://tally.so/r/3EEp02", "_blank")}
-              >
-                <Play className="mr-2 h-4 w-4" />
-                Ver cómo funciona
-              </Button>
-            </div>
-
-            {/* Message below CTA */}
-            <div className="text-center mb-6"></div>
+  {/* Ve nuestro Showcase */}
+  <Button
+    asChild
+    size="default"
+    variant="outline"
+    className="!rounded-none px-6 py-2.5 bg-background/50 backdrop-blur-sm border-primary/20 hover:bg-primary/5"
+  >
+    <Link href="/showcase">
+      <Play className="mr-2 h-4 w-4" />
+      Ve nuestro Showcase
+    </Link>
+  </Button>
+</div>
 
             {/* Stats */}
             <div className="grid grid-cols-4 gap-4 pt-6 border-t border-border/50 text-center">
@@ -143,9 +138,9 @@ export function CompaniesHero() {
                   <Activity className="h-4 w-4 text-green-500" />
                   <div className="text-xl md:text-2xl font-bold text-green-500">+100K</div>
                 </div>
-                <div className="text-xs text-muted-foreground">Interacciones 
-        </div>
+                <div className="text-xs text-muted-foreground">Interacciones</div>
               </div>
+
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <Star className="h-4 w-4 text-yellow-500" />
@@ -153,6 +148,7 @@ export function CompaniesHero() {
                 </div>
                 <div className="text-xs text-muted-foreground">Peer reviews</div>
               </div>
+
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1 mb-1">
                   <GraduationCap className="h-4 w-4 text-blue-500" />
@@ -163,19 +159,15 @@ export function CompaniesHero() {
             </div>
           </motion.div>
 
-          {/* Right Content - Network Visualization (Hidden on Mobile) */}
+          {/* Right Content (sin glow violeta) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative hidden lg:block"
           >
-            {/* Network Visualization Container */}
             <div className="relative flex items-center justify-center">
-              {/* Enhanced background with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-pink-500/10 rounded-full blur-2xl scale-110"></div>
-
-              {/* Main network visualization */}
+              {/* Sin overlay violeta */}
               <div className="relative w-[400px] h-[400px] flex items-center justify-center">
                 <Image
                   src="/network-visualization-transparent.png"
@@ -185,67 +177,24 @@ export function CompaniesHero() {
                   className="object-contain drop-shadow-2xl"
                   priority
                 />
-
-                {/* Floating overlay info */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2"></div>
               </div>
 
-              {/* Floating Network Indicators */}
+              {/* Indicadores flotantes en tonos fríos */}
               <motion.div
-                animate={{
-                  y: [-8, 8, -8],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-                className="absolute -top-4 -right-4 bg-purple-500/20 backdrop-blur-sm rounded-full p-3 border border-purple-500/30"
+                animate={{ y: [-8, 8, -8], rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 bg-cyan-500/20 backdrop-blur-sm rounded-full p-3 border border-cyan-500/30"
               >
-                <Users className="h-5 w-5 text-purple-500" />
+                <Users className="h-5 w-5 text-cyan-500" />
               </motion.div>
 
               <motion.div
-                animate={{
-                  y: [8, -8, 8],
-                  x: [-2, 2, -2],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
+                animate={{ y: [8, -8, 8], x: [-2, 2, -2] }}
+                transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
                 className="absolute -bottom-4 -left-4 bg-blue-500/20 backdrop-blur-sm rounded-full p-3 border border-blue-500/30"
               >
                 <Activity className="h-5 w-5 text-blue-500" />
               </motion.div>
-
-              {/* Additional floating elements for enhanced visual appeal */}
-              <motion.div
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "linear",
-                }}
-                className="absolute top-1/4 -left-8 w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"
-              />
-
-              <motion.div
-                animate={{
-                  rotate: [360, 0],
-                }}
-                transition={{
-                  duration: 15,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "linear",
-                }}
-                className="absolute bottom-1/4 -right-8 w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full opacity-40"
-              />
             </div>
           </motion.div>
         </div>

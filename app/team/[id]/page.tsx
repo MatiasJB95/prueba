@@ -1,602 +1,544 @@
-"use client"
-import { use, useEffect, useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import Header from "@/components/header"
-import { Footer } from "@/components/footer"
-import {
-  ArrowLeft,
-  Users,
-  BarChart,
-  Clock,
-  CheckCircle,
-  Video,
-  UserCheck,
-  FileText,
-  Building2,
-  MessageSquare,
-  Star,
-  Share2,
-  Copy,
-  Linkedin,
-  Facebook,
-  Twitter,
-} from "lucide-react"
-import { formatCountryWithFlag, guessIsoFromCountry } from "@/lib/country-utils"
+// app/projectshowcase/[id]/page.tsx
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import rawTeams from "@/app/data/teams.json";
+import Header from "@/components/HeaderBrand";
+import { Users, FileText, Video, Clock } from "lucide-react";
+import React from "react";
+import { ProjectCard, type Project } from "@/components/ProjectCard";
+import styles from "./other-projects.module.css";
 
-// ---------------------
-// Tipos API
-// ---------------------
-type ApiMember = {
-  profilePhotoUrl: string
-  name: string
-  lastName: string
-  role: string
-  country: string
-  timezone: string
-  reviewsReceivedCount: number
-  peerReview: number
-  attendence: number
-  userdeliverables: number
-  workingTime: number
-  menssagesSend: number
-}
+// ---------- Tipos ----------
+type Member = {
+  id: string | number;
+  name: string;
+  country?: string;
+  role: string;
+  avatarUrl?: string;
+  actividadHoras: number;
+  entregables: number;
+  reviews: number;
+  rating: number;
+};
 
-type ApiTeam = {
-  id: number | string
-  client: {
-    name: string
-    logoUrl: string
-    sector: string
-    size: number
-    description: string
+type Metric = {
+  label: string;
+  value: string | number;
+  sublabel?: string;
+};
+
+type Team = {
+  id: string;
+  name: string;
+  company: string;
+  description: string;
+  members: Member[];
+  metrics: Metric[];
+  cover?: string;
+  weeksLabel?: string;
+  tags?: string[];
+  tools?: string[];
+  languages?: string[];
+  skillNames?: string[];
+};
+
+// ---------- Utils ----------
+const PLACEHOLDER_AVATAR = "/placeholder-user.jpg";
+
+const RatingPill = ({ value }: { value: number }) => (
+  <div className="h-10 w-16 min-w-16 bg-gradient-to-b from-fuchsia-500/30 to-indigo-500/30 flex items-center justify-center text-base font-bold text-fuchsia-100 rounded-lg shadow-lg">
+    {value}
+  </div>
+);
+
+const toNumber = (x: any, def = 0) => {
+  const n = Number(x);
+  return Number.isFinite(n) ? n : def;
+};
+
+const slugify = (s: string) =>
+  s
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+
+const isValidImageSrc = (s: any): s is string => {
+  if (typeof s !== "string") return false;
+  const v = s.trim();
+  if (!v || v === "-" || v === "—") return false;
+  const fixed = v.startsWith("/public/") ? v.replace("/public", "") : v;
+  return (
+    fixed.startsWith("/") ||
+    fixed.startsWith("http://") ||
+    fixed.startsWith("https://") ||
+    /^[a-zA-Z0-9._-]+$/.test(fixed)
+  );
+};
+
+const fixLocalPublic = (s: string) => {
+  let fixed = s.startsWith("/public/") ? s.replace("/public", "") : s;
+  if (!fixed.startsWith("/") && !fixed.startsWith("http")) fixed = "/" + fixed;
+  return fixed;
+};
+
+// ---- Normalizadores ----
+function normalizeMember(m: any): Member {
+  let avatar: string | undefined = undefined;
+  if (isValidImageSrc(m?.avatarUrl)) {
+    avatar = fixLocalPublic(m.avatarUrl.trim());
   }
-  description: string
-  projectType: string
-  repositoryUrl?: string
-  monthYear?: string // "2025-07"
-  vertical: string
-  weekProject: number
-  numberMembers: number
-  status: boolean
-  chatCount: number
-  totalMeeting: number
-  totalDelivables: number
-  skillNames?: string[]
-  toolNames?: string[]
-  members: ApiMember[]
+  return {
+    id: m?.id ?? Math.random(),
+    name: String(m?.name ?? "Sin nombre"),
+    country: m?.country ?? m?.pais ?? undefined,
+    role: String(m?.role ?? m?.puesto ?? "Miembro"),
+    avatarUrl: avatar,
+    actividadHoras: toNumber(m?.actividadHoras, 0),
+    entregables: toNumber(m?.entregables, 0),
+    reviews: toNumber(m?.reviews, 0),
+    rating: toNumber(m?.rating, 0),
+  };
 }
 
-// ---------------------
-// Utilidades
-// ---------------------
-
-const onImgError: React.ReactEventHandler<HTMLImageElement> = (e) => {
-  const img = e.currentTarget
-  if (!img.src.endsWith("/placeholder-user.jpg")) img.src = "/placeholder-user.jpg"
+function normalizeMetric(x: any): Metric {
+  return {
+    label: String(x?.label ?? x?.nombre ?? "Métrica"),
+    value: x?.value ?? x?.valor ?? 0,
+    sublabel: x?.sublabel ?? x?.subtitulo ?? undefined,
+  };
 }
 
-function coverBySector(sectorRaw: string | undefined) {
-  const sector = (sectorRaw || "").toLowerCase().trim()
-  const map: Record<string, string> = {
-    crypto: "/interconnected-crypto-web3.png",
-    fintech: "/modern-fintech-dashboard.png",
-    healthtech: "/Healthtech.png",
-    insurtech: "/connected-insurance-growth.png",
-    retail: "/retail-ml-insights.png",
-    edtech: "/connected-learning-journey.png",
-  }
-  return map[sector] ?? ""
-}
+function normalizeTeam(t: any): Team {
+  const membersArr = Array.isArray(t?.members) ? t.members.map(normalizeMember) : [];
+  const metricsArr = Array.isArray(t?.metrics) ? t.metrics.map(normalizeMetric) : [];
 
-function monthRangeLabel(monthYear?: string, weeks = 4) {
-  if (!monthYear) return "—"
-  const [y, m] = monthYear.split("-").map((n) => parseInt(n, 10))
-  const start = new Date(y, m - 1, 1)
-  const end = new Date(start)
-  end.setDate(start.getDate() + weeks * 7)
-  const fmt = (d: Date) =>
-    d.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-    })
-  const s = fmt(start)
-  const e = fmt(end)
-  return s === e ? s : `${s} – ${e}`
-}
-
-function flagCdnUrlFromIso(iso?: string | null, w = 20) {
-  if (!iso) return null
-  const width = w
-  const height = Math.round((w * 3) / 4)
-  return `https://flagcdn.com/${width}x${height}/${iso.toLowerCase()}.png`
-}
-
-const capFirst = (s?: string) => (s && s.length > 0 ? s[0].toUpperCase() + s.slice(1) : s ?? "")
-
-export default function TeamPage({ params }: { params: Promise<{ id: string }> }) {
-  const router = useRouter()
-  const { id } = use(params)
-
-  const [apiTeam, setApiTeam] = useState<ApiTeam | null>(null)
-  const [isVerified, setIsVerified] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-
-  // Share UI
-  const [shareOpen, setShareOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    let mounted = true
-    const load = async () => {
-      try {
-        const res = await fetch(`http://localhost:8080/showcase/team/${id}`, { cache: "no-store" })
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const data = (await res.json()) as ApiTeam
-        if (mounted) setApiTeam(data)
-      } catch (e) {
-        console.error("Error cargando team:", e)
-      } finally {
-        if (mounted) setIsLoading(false)
-      }
-    }
-    load()
-    return () => {
-      mounted = false
-    }
-  }, [id])
-
-  useEffect(() => {
-    const emailVerified = localStorage.getItem("emailVerified") === "true"
-    if (!emailVerified) {
-      localStorage.setItem("pendingTeamView", String(id))
-      router.push("/showcase")
-    } else {
-      setIsVerified(true)
-    }
-  }, [id, router])
-
-  const sector = apiTeam?.client?.sector || ""
-  const cover = coverBySector(sector)
-  const monthLabel = useMemo(
-    () => monthRangeLabel(apiTeam?.monthYear, apiTeam?.weekProject ?? 4),
-    [apiTeam?.monthYear, apiTeam?.weekProject]
-  )
-
-  const totalMessages = apiTeam?.chatCount ?? 0
-  const totalMeetings = apiTeam?.totalMeeting ?? 0
-  const totalDeliverables = apiTeam?.totalDelivables ?? 0
-  const totalWorkingTime = (apiTeam?.members || []).reduce((sum, m) => sum + (m.workingTime || 0), 0)
-  const connectionHours = Math.max(1, Math.round(totalWorkingTime / 60))
-  const apiSkills = apiTeam?.skillNames || []
-  const apiTools = apiTeam?.toolNames || []
-
-  const members = (apiTeam?.members || []).map((m) => ({
-    avatar: m.profilePhotoUrl || "/placeholder-user.jpg",
-    name: `${m.name} ${m.lastName}`.trim(),
-    role: m.role,
-    country: m.country,
-    timezone: m.timezone,
-    peerReview: m.peerReview,
-    attendance: m.attendence,
-    deliverables: m.userdeliverables,
-    workingTime: m.workingTime,
-    messagesSent: m.menssagesSend,
-  }))
-
-  const currentUrl =
-    typeof window !== "undefined" ? window.location.href : `https://example.com/team/${encodeURIComponent(String(id))}`
-  const shareText = apiTeam?.client?.name ? `Check this team: ${apiTeam.client.name}` : "Check this team"
-
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(currentUrl)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1200)
-    } catch {}
+  let cover: string | undefined = undefined;
+  const rawCover = t?.cover ?? t?.portada;
+  if (isValidImageSrc(rawCover)) {
+    cover = fixLocalPublic(rawCover.trim());
+  } else {
+    cover = "/placeholder-logo.png";
   }
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    )
-  }
+  const name = String(t?.name ?? t?.title ?? "Título de proyecto");
+  const idStr = t?.id != null ? String(t.id) : slugify(name);
 
-  if (!isVerified) return null
+  return {
+    id: idStr,
+    name,
+    company: String(t?.company ?? "NoCountry"),
+    description: String(t?.description ?? ""),
+    members: membersArr,
+    metrics: metricsArr,
+    cover,
+    weeksLabel: t?.weeksLabel ?? "Proyecto de 5 semanas",
+    tags: Array.isArray(t?.tags) ? t.tags.map(String) : [],
+    tools: Array.isArray(t?.tools) ? t.tools.map(String) : [],
+    languages: Array.isArray(t?.languages)
+      ? t.languages.map(String)
+      : Array.isArray(t?.skillNames)
+      ? t.skillNames.map(String)
+      : [],
+    skillNames: Array.isArray(t?.skillNames) ? t.skillNames.map(String) : [],
+  };
+}
 
-  if (!apiTeam) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          <div className="container py-12">
-            <p className="text-muted-foreground">No se encontró información del equipo.</p>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    )
-  }
+function getTeams(): Team[] {
+  const data = rawTeams as unknown;
+  if (Array.isArray(data)) return data.map(normalizeTeam);
+  return [normalizeTeam(data)];
+}
+
+// ---- Helpers métricas ----
+function findMetric(metrics: Metric[], keys: string[]): Metric | undefined {
+  const norm = (s: unknown) => String(s ?? "").toLowerCase().trim();
+  return metrics.find((m) => keys.some((k) => norm(m.label).includes(k)));
+}
+
+function metricNumber(v: unknown): string {
+  const n = parseInt(String(v ?? "").replace(/[^0-9.-]/g, ""), 10);
+  return Number.isFinite(n) ? String(n) : "0";
+}
+
+// ---- Mapper a ProjectCard ----
+function teamToProject(t: Team): Project {
+  const entregablesMetric = findMetric(t.metrics, ["entregables", "deliverable"]);
+  const deliverables = parseInt(metricNumber(entregablesMetric?.value), 10);
+
+  return {
+    id: t.id,
+    title: t.name,
+    cover: t.cover,
+    tags: t.tags ?? [],
+    deliverables: Number.isFinite(deliverables) ? deliverables : 0,
+    members: (t.members ?? []).map((m) => ({
+      name: m.name,
+      avatar: m.avatarUrl || PLACEHOLDER_AVATAR,
+    })),
+  } as Project;
+}
+
+// ---------- Página ----------
+type ParamsMaybePromise = { id: string } | Promise<{ id: string }>;
+
+export default async function Page({ params }: { params: ParamsMaybePromise }) {
+  // Soporta params síncrono o Promise (según versión/config de Next)
+  const { id } =
+    typeof (params as any)?.then === "function"
+      ? await (params as Promise<{ id: string }>)
+      : (params as { id: string });
+
+  const teams = getTeams();
+  const team =
+    teams.find((t) => t.id === id) || teams.find((t) => slugify(t.name) === id);
+
+  if (!team) return notFound();
+
+  // Proyectos para las cards (excluye el actual)
+  const projectsAll: Project[] = teams
+    .filter((t) => t.id !== id && slugify(t.name) !== id)
+    .map(teamToProject);
+
+  // Selección aleatoria
+const shuffled = [...projectsAll].sort(() => Math.random() - 0.5);
+const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
+
+  const {
+    name,
+    description,
+    members = [],
+    metrics = [],
+    cover,
+    weeksLabel,
+    tags,
+    skillNames,
+    tools,
+  } = team;
+
+  const allLabels = [...(tags ?? []), ...(skillNames ?? []), ...(tools ?? [])].filter(
+    (lbl) => lbl && lbl.trim() !== ""
+  );
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <main>
+      {/* Contenedor oscuro */}
+      <div className="relative mx-auto max-w-6xl px-4 py-10 text-white bg-[hsl(220,70%,3.9%)] rounded-3xl shadow-xl">
+        <Header />
 
-      {/* MAIN: aislamos y pintamos fondo sólido solo para esta página */}
-      <main className="flex-1 relative isolate">
-        {/* Overlay absoluto SOLO dentro del main (no tapa el header/footer) */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "hsl(220 70% 3.9%)",
-            zIndex: 2147483646, // muy alto para tapar cualquier nebulosa global
-          }}
-        />
+        {/* Intro */}
+        <section className="flex flex-col items-center justify-center text-center pt-20 pb-12">
+          <p className="text-xs uppercase tracking-wider text-white/70">{weeksLabel}</p>
+          <h1 className="mt-3 text-5xl md:text-6xl font-extrabold text-white">{name}</h1>
 
-        {/* Contenido por encima del overlay */}
-        <div style={{ position: "relative", zIndex: 2147483647 }}>
-          {/* Hero más compacto (sin cambiar zoom) */}
-          <div className="relative h-36 md:h-48 w-full">
-            <img
-              src={cover || "/placeholder.svg"}
-              alt={`${apiTeam.client?.name || "Team"} cover`}
-              className="w-full h-full object-cover"
-              onError={onImgError}
+          <div className="mt-6 flex items-center gap-3">
+            <span className="text-white/70">Para</span>
+            <Image
+              src="/nocountry-logo.png"
+              alt="NoCountry"
+              width={140}
+              height={40}
+              className="h-8 w-auto opacity-90"
+              priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full p-3">
-              <div className="container">
-                <Link
-                  href="/showcase"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-2"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Teams
-                </Link>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="secondary">{apiTeam.vertical}</Badge>
-                  <Badge variant="outline">{sector}</Badge>
-                </div>
-              </div>
+          </div>
+        </section>
+
+        {/* Portada */}
+        <section className="relative overflow-hidden rounded-2xl border border-white/10 mt-12 mb-20">
+          <Image
+            src={cover ?? "/Healthtech.png"}
+            alt="Cover"
+            width={1200}
+            height={500}
+            className="w-full h-[300px] object-cover"
+            priority
+          />
+        </section>
+
+        {/* Descripción + Etiquetas */}
+        <section className="py-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div>
+            <h3 className="mb-3 inline-block text-xl font-semibold">Descripción</h3>
+            <p className="max-w-3xl text-white/80">{description}</p>
+          </div>
+
+{allLabels.length > 0 && (
+  <div className="ml-0 md:ml-10 mt-4 md:mt-0">
+    <div className="flex flex-wrap gap-2 justify-start md:justify-end md:max-w-[520px]">
+      {allLabels.map((label) => (
+        <span
+          key={label}
+          className="rounded-full border border-white px-4 py-1 text-sm text-white/80"
+        >
+          {label}
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+        </section>
+
+        {/* Equipo y Rendimiento */}
+        <section className="py-6">
+          <h3 className="text-xl font-semibold">Equipo y</h3>
+          <h3 className="mb-6 text-xl font-semibold">Rendimiento</h3>
+
+          {/* Header desktop */}
+          <div
+            className="hidden md:grid border-b border-white/12 px-6 py-3"
+            style={{ gridTemplateColumns: "1fr 480px" }}
+          >
+            <div className="text-[11px] uppercase tracking-wide text-white/60">Talento</div>
+            <div className="grid" style={{ gridTemplateColumns: "120px 120px 120px 120px" }}>
+              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Actividad</div>
+              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Entregables</div>
+              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Reviews</div>
+              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Rating</div>
             </div>
           </div>
 
-          {/* Contenido */}
-          <div className="container py-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Columna principal */}
-              <div className="lg:col-span-2">
-                <div className="flex justify-between items-start mb-4">
-                  <h1 className="text-2xl md:text-3xl font-bold">
-                    {apiTeam.vertical} - {sector}
-                  </h1>
-                  <div className="flex items-center gap-2 relative">
-                    <span className="text-sm font-medium text-blue-400">{monthLabel}</span>
-
-                    <div className="relative">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="h-8"
-                        onClick={() => setShareOpen((v) => !v)}
-                        aria-haspopup="menu"
-                        aria-expanded={shareOpen}
-                        aria-label="Share Team"
-                      >
-                        <Share2 className="h-4 w-4 mr-2" />
-                        Share Team
-                      </Button>
-
-                      {shareOpen && (
-                        <div
-                          className="absolute right-0 mt-2 w-56 rounded-lg border border-border bg-card shadow-lg p-1 z-20"
-                          role="menu"
-                        >
-                          <button
-                            className="w-full flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent/40 text-sm"
-                            onClick={copyLink}
-                            role="menuitem"
-                          >
-                            <Copy className="h-4 w-4" />
-                            {copied ? "Copied!" : "Copy link"}
-                          </button>
-                          <a
-                            className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent/40 text-sm"
-                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(
-                              shareText
-                            )}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            role="menuitem"
-                          >
-                            <Twitter className="h-4 w-4" />
-                            Share on X
-                          </a>
-                          <a
-                            className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent/40 text-sm"
-                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            role="menuitem"
-                          >
-                            <Linkedin className="h-4 w-4" />
-                            Share on LinkedIn
-                          </a>
-                          <a
-                            className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent/40 text-sm"
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            role="menuitem"
-                          >
-                            <Facebook className="h-4 w-4" />
-                            Share on Facebook
-                          </a>
+          {/* Body desktop (con degradé) */}
+          <div className="relative hidden md:block">
+            <div
+              className="pointer-events-none absolute inset-y-0 z-0"
+              style={{
+                background: "linear-gradient(to right, rgba(11, 58, 82, 0.5), rgba(106, 17, 77, 0.5))",
+                width: "120px",
+                left: "calc(100% - 120px)",
+              }}
+            />
+            <div className="grid" style={{ gridTemplateColumns: "1fr 480px" }}>
+              {members.map((m) => (
+                <div key={m.id} className="contents">
+                  {/* Talento */}
+                  <div className="flex items-center gap-3 px-6 py-4 border-t border-white/10 z-10">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0">
+                      {m.avatarUrl ? (
+                        <Image src={m.avatarUrl} alt={m.name} fill className="object-cover" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-xs text-white/60">
+                          {m.name.slice(0, 1)}
                         </div>
                       )}
                     </div>
-                  </div>
-                </div>
-
-                {/* KPIs */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-pink-400" />
-                      <span>{apiTeam.numberMembers} members</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-cyan-400" />
-                      <span>{apiTeam.weekProject} weeks</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <BarChart className="h-4 w-4 text-green-400" />
-                      <span>{apiTeam.status ? "Active" : "Available"}</span>
+                    <div className="min-w-0 leading-tight">
+                      <div className="text-base font-medium truncate">{m.name}</div>
+                      <div className="text-[12px] text-white/60 truncate">
+                        {m.country ? `de ${m.country} · ${m.role}` : m.role}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Descripción */}
-                <p className="text-muted-foreground mb-8">
-                  <span className="font-semibold text-red-400">Business Challenge:</span>{" "}
-                  <span className="font-semibold text-blue-400">{apiTeam.client?.name}</span> {apiTeam.description}
-                </p>
-
-                {/* Insights */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4">Team Performance Insights</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-gradient-to-r from-pink-500/10 to-cyan-500/10 p-4 rounded-lg text-center border border-pink-500/20">
-                      <div className="flex justify-center mb-2">
-                        <MessageSquare className="h-6 w-6 text-cyan-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-cyan-400">{totalMessages}</div>
-                      <div className="text-xs text-muted-foreground">Total Messages</div>
+                  {/* Métricas */}
+                  <div className="grid" style={{ gridTemplateColumns: "120px 120px 120px 120px" }}>
+                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
+                      {m.actividadHoras}
                     </div>
-                    <div className="bg-gradient-to-r from-pink-500/10 to-cyan-500/10 p-4 rounded-lg text-center border border-pink-500/20">
-                      <div className="flex justify-center mb-2">
-                        <Clock className="h-6 w-6 text-pink-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-pink-400">{connectionHours}h</div>
-                      <div className="text-xs text-muted-foreground">Connection Time</div>
+                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
+                      {m.entregables}
                     </div>
-                    <div className="bg-gradient-to-r from-pink-500/10 to-cyan-500/10 p-4 rounded-lg text-center border border-pink-500/20">
-                      <div className="flex justify-center mb-2">
-                        <Video className="h-6 w-6 text-cyan-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-cyan-400">{totalMeetings}</div>
-                      <div className="text-xs text-muted-foreground">Meetings</div>
+                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
+                      {m.reviews}
                     </div>
-                    <div className="bg-gradient-to-r from-pink-500/10 to-cyan-500/10 p-4 rounded-lg text-center border border-pink-500/20">
-                      <div className="flex justify-center mb-2">
-                        <FileText className="h-6 w-6 text-pink-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-pink-400">{totalDeliverables}</div>
-                      <div className="text-xs text-muted-foreground">Deliverables</div>
+                    <div className="text-center text-1xl font-extrabold text-white border-t border-white/10 py-4 z-10 w-full bg-transparent">
+                      {m.rating}
                     </div>
                   </div>
                 </div>
-
-                {/* Team Members */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4">Team Members</h3>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    {members.map((member, index) => {
-                      const contribution = Math.max(0, Math.min(10, member.peerReview ?? 7.5))
-                      const { label: countryLabel } = formatCountryWithFlag(member.country)
-                      const iso = guessIsoFromCountry(member.country)
-                      const flagUrl = flagCdnUrlFromIso(iso, 20)
-                      const countryTwo = (iso?.toUpperCase() || countryLabel.slice(0, 2).toUpperCase())
-
-                      return (
-                        <div
-                          key={index}
-                          className="bg-transparent backdrop-blur-sm rounded-xl p-4 border border-slate-600/30 hover:border-slate-500/50 transition-all duration-300"
-                        >
-                          <div className="space-y-4">
-                            <div className="flex items-start gap-4">
-                              <div className="relative flex-shrink-0">
-                                <img
-                                  src={member.avatar || "/placeholder-user.jpg"}
-                                  alt={member.name}
-                                  className="w-16 h-16 rounded-full object-cover border-2 border-gradient-to-r from-pink-500/50 to-cyan-500/50"
-                                  onError={onImgError}
-                                />
-                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-background shadow-lg"></div>
-                              </div>
-
-                              <div className="flex-1">
-                                <div className="flex items-start justify-between mb-2">
-                                  <div>
-                                    <h4 className="text-lg font-bold text-white leading-tight mb-1">
-                                      {member.name.split(" ")[0]}
-                                    </h4>
-                                    <p className="text-slate-200 text-sm font-medium mb-1">{member.role}</p>
-                                    <div className="flex items-center gap-2 whitespace-nowrap">
-                                      {flagUrl ? (
-                                        <img
-                                          src={flagUrl}
-                                          alt={`${countryLabel} flag`}
-                                          className="w-4 h-3 rounded-[2px] ring-1 ring-white/20"
-                                          onError={(e) => {
-                                            e.currentTarget.style.display = "none"
-                                          }}
-                                        />
-                                      ) : (
-                                        <span className="text-sm">🌍</span>
-                                      )}
-                                      <span className="text-slate-300 text-xs font-medium">{countryTwo}</span>
-                                      <span className="text-slate-500 text-xs">•</span>
-                                      <span className="text-slate-300 text-xs font-medium">{member.timezone}</span>
-                                    </div>
-                                  </div>
-                                  <div className="flex flex-col items-center gap-1 bg-transparent px-3 py-2 rounded-lg">
-                                    <div className="flex items-center gap-1">
-                                      <span className="text-yellow-300 text-2xl font-bold">
-                                        {contribution.toFixed(1)}
-                                      </span>
-                                      <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
-                                    </div>
-                                    <span className="text-yellow-200 text-xs">peer review</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-300">
-                              <div className="flex items-center gap-2">
-                                <Clock className="h-3 w-3 text-cyan-400" />
-                                <span>{Math.max(1, Math.round((member.workingTime || 0) / 60))}h active this week</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <MessageSquare className="h-3 w-3 text-pink-400" />
-                                <span>{member.messagesSent ?? 0} messages sent</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <UserCheck className="h-3 w-3 text-green-400" />
-                                <span>{member.attendance ?? 0}% attendance</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <FileText className="h-3 w-3 text-blue-400" />
-                                <span>{member.deliverables ?? 0} deliverables</span>
-                              </div>
-                            </div>
-
-                            <div className="bg-transparent rounded-lg p-3 border border-slate-600/30">
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-slate-300 text-xs font-medium">Contribución Observada</span>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 font-bold text-sm">
-                                  {contribution.toFixed(1)}
-                                </span>
-                              </div>
-                              <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                                <div
-                                  className="bg-gradient-to-r from-pink-500 to-cyan-400 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                  style={{ width: `${(contribution / 10) * 100}%` }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Skills & Tools */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4">Skills & Tools Used</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-medium mb-3 text-primary">Core Skills</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {apiSkills.map((skill, i) => (
-                          <Badge key={i} variant="secondary" className="bg-primary/10 text-primary">
-                            {capFirst(skill)}
-                          </Badge>
-                        ))}
-                        {apiSkills.length === 0 && <span className="text-sm text-muted-foreground">—</span>}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-3 text-secondary">Tools & Technologies</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {apiTools.map((tool, i) => (
-                          <Badge key={i} variant="outline" className="bg-secondary/10 text-secondary border-secondary/30">
-                            {capFirst(tool)}
-                          </Badge>
-                        ))}
-                        {apiTools.length === 0 && <span className="text-sm text-muted-foreground">—</span>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* (Sección "Team Deliverables" eliminada como pediste) */}
-              </div>
-
-              {/* Sidebar */}
-              <div className="space-y-6">
-                <div className="bg-transparent rounded-lg p-6 border border-blue-500/20">
-                  <div className="flex items-start gap-4">
-                    <div className="rounded-lg p-3 shadow-sm bg-black/80 border border-slate-700">
-                      <img
-                        src={apiTeam.client?.logoUrl || "/placeholder.svg"}
-                        alt={`${apiTeam.client?.name} logo`}
-                        className="h-12 w-12 object-contain"
-                        onError={onImgError}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Building2 className="h-5 w-5 text-blue-400" />
-                        <span className="text-sm font-medium text-blue-400">Client Company</span>
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{apiTeam.client?.name}</h3>
-                      <p className="text-muted-foreground text-sm mb-3">{apiTeam.client?.description}</p>
-                      <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-                        <span>Industry: {sector || "—"}</span>
-                        <span>Size: {apiTeam.client?.size ? `${apiTeam.client.size} employees` : "—"}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-card border border-border rounded-lg p-6 sticky top-20">
-                  <h3 className="text-xl font-bold mb-4">Interested in This Team?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Let us help you find and assign the perfect team for your specific project needs and requirements.
-                  </p>
-
-                  <div className="space-y-4 mb-6">
-                    <Button className="w-full gradient-bg">Request Team Assignment</Button>
-                  </div>
-
-                  <div className="mb-6">
-                    <h4 className="font-medium mb-3 text-sm text-muted-foreground">Other Available Verticals</h4>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {["Mobile Development", "Web3", "Machine Learning", "Customer Experience"].map((v) => (
-                        <Button key={v} size="sm" variant="outline" type="button" className="text-xs">
-                          {v}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                {/* Fin sidebar */}
-              </div>
+              ))}
             </div>
           </div>
-        </div>
-      </main>
 
-      <Footer />
+          {/* Header mobile */}
+          <div className="block md:hidden border-b border-white/12 px-6 py-2">
+            <div className="flex items-center justify-between">
+              <div className="text-[11px] uppercase tracking-wide text-white/60">Talento</div>
+              <div className="text-[11px] uppercase tracking-wide text-white/80">Rating</div>
+            </div>
+          </div>
+
+          {/* Body mobile (solo rating) */}
+          <div className="relative block md:hidden">
+            {members.map((m) => (
+              <div
+                key={m.id}
+                className="relative flex items-center justify-between border-t border-white/10 px-6 py-4"
+              >
+                {/* franja detrás del rating (fila) */}
+                <div
+                  className="pointer-events-none absolute inset-y-0 right-0 w-24"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(11,58,82,0.5), rgba(106,17,77,0.5))",
+                  }}
+                />
+
+                {/* Avatar + Nombre */}
+                <div className="flex items-center gap-3 z-10">
+                  <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0">
+                    {m.avatarUrl ? (
+                      <Image src={m.avatarUrl} alt={m.name} fill className="object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-xs text-white/60">
+                        {m.name.slice(0, 1)}
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0 leading-tight">
+                    <div className="text-base font-medium truncate">{m.name}</div>
+                    <div className="text-[12px] text-white/60 truncate">
+                      {m.country ? `de ${m.country} · ${m.role}` : m.role}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rating */}
+                <div className="text-xl font-extrabold text-white z-10">{m.rating}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== Métricas del equipo (globales del JSON) ===== */}
+        <section className="pt-8 mt-4">
+          <h3 className="sr-only">Métricas del equipo</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Tamaño de equipo */}
+            {(() => {
+              const m = findMetric(metrics, ["tamaño de equipo", "tamano de equipo", "team size"]);
+              const val = metricNumber(m?.value);
+              return (
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex items-center gap-2">
+                    <div className="text-3xl md:text-4xl font-semibold">{val}</div>
+                    <Users className="h-4 w-4 opacity-80" />
+                  </div>
+                  <div className="leading-tight text-sm text-white/80 mt-1">Tamaño de equipo</div>
+                </div>
+              );
+            })()}
+
+            {/* Entregables totales */}
+            {(() => {
+              const m = findMetric(metrics, ["entregables", "deliverable"]);
+              const val = metricNumber(m?.value);
+              return (
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex items-center gap-2">
+                    <div className="text-3xl md:text-4xl font-semibold">{val}</div>
+                    <FileText className="h-4 w-4 opacity-80" />
+                  </div>
+                  <div className="leading-tight text-sm text-white/80 mt-1">Entregables totales</div>
+                </div>
+              );
+            })()}
+
+            {/* Reuniones totales */}
+            {(() => {
+              const m = findMetric(metrics, ["reuniones", "meetings"]);
+              const val = metricNumber(m?.value);
+              return (
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex items-center gap-2">
+                    <div className="text-3xl md:text-4xl font-semibold">{val}</div>
+                    <Video className="h-4 w-4 opacity-80" />
+                  </div>
+                  <div className="leading-tight text-sm text-white/80 mt-1">Reuniones totales</div>
+                </div>
+              );
+            })()}
+
+            {/* Tiempo total simulado (horas) */}
+            {(() => {
+              const m = findMetric(metrics, ["tiempo total", "horas", "simulado"]);
+              const val = metricNumber(m?.value);
+              const unit = (m?.sublabel ?? "").toString().toLowerCase().includes("hora") ? "horas" : "";
+
+              return (
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex items-center gap-2">
+                    <div className="text-3xl md:text-4xl font-semibold">{val}</div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4 opacity-80" />
+                      {unit && <span className="text-sm text-white/80">{unit}</span>}
+                    </div>
+                  </div>
+                  <div className="leading-tight text-sm text-white/80 mt-1">Tiempo total simulado</div>
+                </div>
+              );
+            })()}
+          </div>
+        </section>
+
+        {/* CTA full-width (full-bleed) dentro del contenedor */}
+        <section className="relative mx-[calc(50%-50vw)] w-screen bg-white text-black py-10 px-6 md:px-12 mt-10 rounded-none">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Columna izquierda */}
+            <div>
+              <h3 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight">
+                ¿Tenés un
+                <br />
+                desafío similar?
+              </h3>
+              <p className="text-gray-700 text-base md:text-lg max-w-md">
+                Contanos sobre tu proyecto o desafío para que miles de talentos puedan
+                proveer soluciones a tus desafíos particulares.
+              </p>
+            </div>
+
+            {/* Columna derecha */}
+            <div className="flex flex-col justify-between h-full md:items-end text-sm md:text-base">
+              <p className="text-gray-600 text-center md:text-right">
+                Si tenés alguna pregunta sobre tu <br /> proyecto, por favor{" "}
+                <span className="font-semibold text-black underline">contactanos</span>
+              </p>
+
+              <a
+                href="https://tally.so/r/3EEp02"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-center md:self-end w-full md:w-auto rounded-md px-10 py-3 font-medium text-white shadow-lg
+                           bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:opacity-90 transition text-center"
+              >
+                Contanos sobre tu proyecto
+              </a>
+            </div>
+          </div>
+        </section>
+
+{/* Otros proyectos – 3 aleatorias; 3→2→1 según ancho automáticamente */}
+<section className="relative mx-[calc(50%-50vw)] w-screen py-10 px-2">
+  <div className="mx-auto max-w-[1320px] px-2">
+    <header className="mb-4 md:mb-6">
+      <span className="block text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/70">
+        Otros proyectos
+      </span>
+      <h3 className="mt-2 text-xl font-semibold text-white">
+        Proyectos que<br /> podrían interesarte
+      </h3>
+    </header>
+
+<div className={styles.row}>
+  {pick3.map((p, i) => (
+    <div
+      key={p.id}
+      className={
+        i === 0
+          ? ""                    // 1ª: siempre visible
+          : i === 1
+          ? "hidden lg:block"     // 2ª: solo desde lg (>=1024px)
+          : "hidden xl:block"     // 3ª: solo desde xl (>=1280px)
+      }
+    >
+      <ProjectCard project={p} />
     </div>
-  )
+  ))}
+</div>
+  </div>
+</section>
+      </div>
+    </main>
+  );
 }
