@@ -203,7 +203,7 @@ function TeamCard({ team, handleImgError, isActive = true }: TeamCardProps) {
     >
       <div
         className="h-full p-5 md:p-6 flex flex-col cursor-pointer"
-        onClick={() => (window.location.href = `/projectshowcase/${team.id}`)}
+        onClick={() => (window.location.href = `/team/${team.id}`)}
       >
         {/* Imagen */}
         <div className="-mx-5 -mt-5 md:-mx-6 rounded-t-xl overflow-hidden">
