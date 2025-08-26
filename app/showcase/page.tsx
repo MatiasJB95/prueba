@@ -1,13 +1,13 @@
-import { ShowcaseSection } from "@/components/showcase-section"
-import { Footer } from "@/components/footer"
+import ShowcaseSection from "@/components/showcase-section"
+import { ShowcaseHeader } from "@/components/showcase-header"
 
 export default function ShowcasePage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
+    <ShowcaseHeader />
       <main className="flex-1">
         <ShowcaseSection />
       </main>
-      <Footer />
     </div>
   )
 }
