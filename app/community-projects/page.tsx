@@ -12,7 +12,7 @@ import rawTeams from "@/app/data/teams.json";
 
 // Tipos
 type Member = { name: string; avatar: string };
-type Project = {
+type ShowcaseProject = {
   id: string;                // usado para /projectshowcase/[id]
   title: string;             // team.name
   eyebrow?: string;          // texto corto arriba del título (usamos primeras tags)
@@ -33,7 +33,6 @@ const DEFAULT_COVER = "/placeholder-logo.png";
 const DEFAULT_SECTOR = "Sector";
 const DEFAULT_TYPE = "Tipos de Proyectos";
 const PLACEHOLDER_AVATAR = "/placeholder-user.jpg";
-
 
 const toNum = (x: any, d = 0) => {
   const n = Number(x);
@@ -68,19 +67,18 @@ const toSlug = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
 
-// Mapear teams.json -> Project[]
-function mapTeamsToProjects(): Project[] {
+// Mapear teams.json -> ShowcaseProject[]
+function mapTeamsToProjects(): ShowcaseProject[] {
   const teams = (rawTeams as any[] | any) ?? [];
   const asArray = Array.isArray(teams) ? teams : [teams];
 
   return asArray.map((t) => {
-    const idStr =
-      t?.id != null ? String(t.id) : toSlug(String(t?.name ?? "proyecto"));
+    const idStr = t?.id != null ? String(t.id) : toSlug(String(t?.name ?? "proyecto"));
     const title = String(t?.name ?? "Proyecto");
+
     const tags: string[] = Array.isArray(t?.tags) ? t.tags.map(String) : [];
     const sector: string = String(t?.sector ?? "Otro");
-    const kind: string =
-      String(t?.kind ?? (tags.length ? tags[0] : "Proyecto"));
+    const kind: string = String(t?.kind ?? (tags.length ? tags[0] : "Proyecto"));
 
     // portada
     let cover = t?.cover ?? t?.portada ?? DEFAULT_COVER;
@@ -91,32 +89,25 @@ function mapTeamsToProjects(): Project[] {
       cover = DEFAULT_COVER;
     }
 
-    
-
     // miembros
     const membersRaw = Array.isArray(t?.members) ? t.members : [];
     const members: Member[] = membersRaw.map((m: any, i: number) => ({
       name: String(m?.name ?? `Miembro ${i + 1}`),
-      avatar: isValidImageSrc(m?.avatarUrl)
-        ? fixLocal(m.avatarUrl)
-        : PLACEHOLDER_AVATAR,
+      avatar: isValidImageSrc(m?.avatarUrl) ? fixLocal(m.avatarUrl) : PLACEHOLDER_AVATAR,
     }));
 
     // entregables desde métricas (si existe)
     let deliverables = 0;
     const metricsArr = Array.isArray(t?.metrics) ? t.metrics : [];
     const entregableMetric = metricsArr.find((x: any) =>
-      String(x?.label ?? x?.nombre ?? "")
-        .toLowerCase()
-        .includes("entregable")
+      String(x?.label ?? x?.nombre ?? "").toLowerCase().includes("entregable")
     );
     if (entregableMetric) {
       deliverables = toNum(entregableMetric.value, 0);
     }
 
     // eyebrow = primeras dos tags
-    const eyebrow =
-      tags.length > 0 ? tags.slice(0, 2).join("  ·  ") : undefined;
+    const eyebrow = tags.length > 0 ? tags.slice(0, 2).join("  ·  ") : undefined;
 
     // sortKey: priorizamos fecha dataTime (dd/mm/yyyy). Si no hay, usamos id numérico.
     const dateKey = parseDDMMYYYY(t?.dataTime);
@@ -139,15 +130,13 @@ function mapTeamsToProjects(): Project[] {
   });
 }
 
-
 export default function CommunityProjectsPage() {
-const [showAllTags, setShowAllTags] = useState(false);
-  const PROJECTS = useMemo(() => {
-    const list = mapTeamsToProjects();
+  const [showAllTags, setShowAllTags] = useState(false);
 
+  const PROJECTS: ShowcaseProject[] = useMemo(() => {
+    const list = mapTeamsToProjects();
     return [...list].sort((a, b) => b.sortKey - a.sortKey);
   }, []);
-
 
   const ALL_SECTORS = useMemo(() => {
     const set = new Set<string>();
@@ -166,7 +155,7 @@ const [showAllTags, setShowAllTags] = useState(false);
   const [type, setType] = useState<string>(DEFAULT_TYPE);
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
-  const filtered = useMemo(() => {
+  const filtered: ShowcaseProject[] = useMemo(() => {
     const sectorIsAll = sector === DEFAULT_SECTOR || sector === "Todos";
     const typeIsAll = type === DEFAULT_TYPE || type === "Todos";
     return PROJECTS.filter(
@@ -190,10 +179,10 @@ const [showAllTags, setShowAllTags] = useState(false);
       <ShowcaseSection />
 
       {/* Comunidad debajo */}
-<section
-  className="relative z-10 pt-6 md:pt-2 pb-12 md:pb-16 bg-[hsl(220,70%,3.9%)] min-h-screen overflow-hidden"
-  data-section="community-projects"
->
+      <section
+        className="relative z-10 pt-6 md:pt-2 pb-12 md:pb-16 bg-[hsl(220,70%,3.9%)] min-h-screen overflow-hidden"
+        data-section="community-projects"
+      >
         {/* Fondo local */}
         <div className="absolute -left-16 -top-24 w-96 h-96 bg-gradient-radial from-purple-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl" />
         <div className="absolute right-0 -bottom-24 w-80 h-80 bg-gradient-radial from-pink-500/15 via-purple-500/8 to-transparent rounded-full blur-3xl" />
@@ -205,14 +194,7 @@ const [showAllTags, setShowAllTags] = useState(false);
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              background: [
-                "#ffffff",
-                "#60a5fa",
-                "#a78bfa",
-                "#34d399",
-                "#fbbf24",
-                "#f472b6",
-              ][i % 6],
+              background: ["#ffffff", "#60a5fa", "#a78bfa", "#34d399", "#fbbf24", "#f472b6"][i % 6],
             }}
             animate={{ opacity: [0.3, 1, 0.3], scale: [0.5, 1.2, 0.5] }}
             transition={{
@@ -223,19 +205,20 @@ const [showAllTags, setShowAllTags] = useState(false);
           />
         ))}
 
-<div className="container relative z-10">
-  <div className="pl-6 md:pl-8 lg:pl-9">
-    {/* Encabezado */}
-    <div className="mt-6 mb-3">
-      <span className="block text-[10px] md:text-[9px] uppercase tracking-[0.2em] text-white mb-1.5">
-        Todos los proyectos
-      </span>
+        <div className="container relative z-10">
+          <div className="pl-6 md:pl-8 lg:pl-9">
+            {/* Encabezado */}
+            <div className="mt-6 mb-3">
+              <span className="block text-[10px] md:text-[9px] uppercase tracking-[0.2em] text-white mb-1.5">
+                Todos los proyectos
+              </span>
 
-      <h1 className="text-2xl md:text-2xl font-semibold text-foreground leading-tight mb-10">
-        Proyectos de<br />
-        nuestra comunidad
-      </h1>
-    </div>
+              <h1 className="text-2xl md:text-2xl font-semibold text-foreground leading-tight mb-10">
+                Proyectos de
+                <br />
+                nuestra comunidad
+              </h1>
+            </div>
 
             {/* Filtros */}
             <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-6 dark-dropdown">
@@ -279,99 +262,99 @@ const [showAllTags, setShowAllTags] = useState(false);
                 </span>
               </div>
 
-{/* Etiquetas rápidas */}
-<div className="hidden md:flex items-center gap-2 flex-wrap relative">
-  {uniqueTags.slice(0, 6).map((t, i) => {
-    const active = activeTags.includes(t)
-    return (
-      <Badge
-        key={`${t}-${i}`}
-        variant="outline"
-        onClick={() =>
-          setActiveTags((prev) =>
-            prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-          )
-        }
-        className={[
-          "px-3 py-1 text-[10px] sm:text-xs rounded-full shadow-lg transition-colors duration-200",
-          "bg-white/20 border border-white/40 !text-white backdrop-blur-sm",
-          "hover:!text-primary hover:bg-white/30 hover:border-white/60",
-          "cursor-pointer select-none", // 👈 no selección de texto y puntero click
-          active ? "!text-primary bg-white/30 border-white/60" : "",
-        ].join(" ")}
-        title={t}
-      >
-        {t}
-      </Badge>
-    )
-  })}
+              {/* Etiquetas rápidas */}
+              <div className="hidden md:flex items-center gap-2 flex-wrap relative">
+                {uniqueTags.slice(0, 6).map((t, i) => {
+                  const active = activeTags.includes(t);
+                  return (
+                    <Badge
+                      key={`${t}-${i}`}
+                      variant="outline"
+                      onClick={() =>
+                        setActiveTags((prev) =>
+                          prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
+                        )
+                      }
+                      className={[
+                        "px-3 py-1 text-[10px] sm:text-xs rounded-full shadow-lg transition-colors duration-200",
+                        "bg-white/20 border border-white/40 !text-white backdrop-blur-sm",
+                        "hover:!text-primary hover:bg-white/30 hover:border-white/60",
+                        "cursor-pointer select-none",
+                        active ? "!text-primary bg-white/30 border-white/60" : "",
+                      ].join(" ")}
+                      title={t}
+                    >
+                      {t}
+                    </Badge>
+                  );
+                })}
 
-  {uniqueTags.length > 6 && (
-<button
-  type="button"
-  onClick={() => setShowAllTags((v) => !v)}
-  className={`
-    px-3 py-1 text-[10px] sm:text-xs rounded-full 
-    bg-white/20 border border-white/40 text-white 
-    backdrop-blur-sm shadow-lg 
-    hover:text-primary hover:bg-white/30 hover:border-white/60 
-    cursor-pointer select-none
-  `}
-  aria-haspopup="true"
-  aria-expanded={showAllTags}
-  title="Ver todas las etiquetas"
->
-  +{uniqueTags.length - 6}
-</button>
-  )}
+                {uniqueTags.length > 6 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllTags((v) => !v)}
+                    className={`
+                      px-3 py-1 text-[10px] sm:text-xs rounded-full 
+                      bg-white/20 border border-white/40 text-white 
+                      backdrop-blur-sm shadow-lg 
+                      hover:text-primary hover:bg-white/30 hover:border-white/60 
+                      cursor-pointer select-none
+                    `}
+                    aria-haspopup="true"
+                    aria-expanded={showAllTags}
+                    title="Ver todas las etiquetas"
+                  >
+                    +{uniqueTags.length - 6}
+                  </button>
+                )}
 
-  {/* Panel con todas las etiquetas */}
-  {showAllTags && (
-    <div
-      className="absolute top-full mt-2 right-0 w-72 max-h-72 overflow-auto rounded-lg border border-white/20 bg-black/70 backdrop-blur-md p-3 shadow-2xl z-20"
-      role="menu"
-      aria-label="Todas las etiquetas"
-    >
-      <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs text-white/70">Todas las etiquetas</span>
-        <button
-          type="button"
-          onClick={() => setShowAllTags(false)}
-          className="text-xs text-white/70 hover:text-white cursor-pointer select-none"
-          title="Cerrar"
-        >
-          Cerrar
-        </button>
-      </div>
+                {/* Panel con todas las etiquetas */}
+                {showAllTags && (
+                  <div
+                    className="absolute top-full mt-2 right-0 w-72 max-h-72 overflow-auto rounded-lg border border-white/20 bg-black/70 backdrop-blur-md p-3 shadow-2xl z-20"
+                    role="menu"
+                    aria-label="Todas las etiquetas"
+                  >
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs text-white/70">Todas las etiquetas</span>
+                      <button
+                        type="button"
+                        onClick={() => setShowAllTags(false)}
+                        className="text-xs text-white/70 hover:text-white cursor-pointer select-none"
+                        title="Cerrar"
+                      >
+                        Cerrar
+                      </button>
+                    </div>
 
-      <div className="flex flex-wrap gap-2">
-        {uniqueTags.map((t) => {
-          const active = activeTags.includes(t)
-          return (
-            <button
-              key={`all-${t}`}
-              type="button"
-              onClick={() => {
-                setActiveTags((prev) =>
-                  prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-                )
-              }}
-              className={[
-                "px-3 py-1 text-[10px] sm:text-xs rounded-full border",
-                "cursor-pointer select-none",
-                active
-                  ? "bg-white/30 border-white/60 text-primary"
-                  : "bg-white/15 border-white/30 text-white hover:bg-white/25 hover:border-white/50"
-              ].join(" ")}
-            >
-              {t}
-            </button>
-          )
-        })}
-      </div>
-    </div>
-  )}
-</div>
+                    <div className="flex flex-wrap gap-2">
+                      {uniqueTags.map((t) => {
+                        const active = activeTags.includes(t);
+                        return (
+                          <button
+                            key={`all-${t}`}
+                            type="button"
+                            onClick={() => {
+                              setActiveTags((prev) =>
+                                prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
+                              );
+                            }}
+                            className={[
+                              "px-3 py-1 text-[10px] sm:text-xs rounded-full border",
+                              "cursor-pointer select-none",
+                              active
+                                ? "bg-white/30 border-white/60 text-primary"
+                                : "bg-white/15 border-white/30 text-white hover:bg-white/25 hover:border-white/50",
+                            ].join(" ")}
+                          >
+                            {t}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Limpiar */}
               <div className="ms-auto">
@@ -395,39 +378,26 @@ const [showAllTags, setShowAllTags] = useState(false);
             </div>
 
             {/* Filtros activos */}
-            {(sector !== DEFAULT_SECTOR ||
-              type !== DEFAULT_TYPE ||
-              activeTags.length > 0) && (
+            {(sector !== DEFAULT_SECTOR || type !== DEFAULT_TYPE || activeTags.length > 0) && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 {sector !== DEFAULT_SECTOR && (
                   <Badge className="bg-primary/15 border border-primary/30 text-foreground">
                     Sector: {sector}
-                    <X
-                      className="ms-2 h-3 w-3 cursor-pointer"
-                      onClick={() => setSector(DEFAULT_SECTOR)}
-                    />
+                    <X className="ms-2 h-3 w-3 cursor-pointer" onClick={() => setSector(DEFAULT_SECTOR)} />
                   </Badge>
                 )}
                 {type !== DEFAULT_TYPE && (
                   <Badge className="bg-primary/15 border border-primary/30 text-foreground">
                     Tipo: {type}
-                    <X
-                      className="ms-2 h-3 w-3 cursor-pointer"
-                      onClick={() => setType(DEFAULT_TYPE)}
-                    />
+                    <X className="ms-2 h-3 w-3 cursor-pointer" onClick={() => setType(DEFAULT_TYPE)} />
                   </Badge>
                 )}
                 {activeTags.map((t) => (
-                  <Badge
-                    key={`t-${t}`}
-                    className="bg-primary/15 border border-primary/30 text-foreground"
-                  >
+                  <Badge key={`t-${t}`} className="bg-primary/15 border border-primary/30 text-foreground">
                     {t}
                     <X
                       className="ms-2 h-3 w-3 cursor-pointer"
-                      onClick={() =>
-                        setActiveTags((prev) => prev.filter((x) => x !== t))
-                      }
+                      onClick={() => setActiveTags((prev) => prev.filter((x) => x !== t))}
                     />
                   </Badge>
                 ))}
@@ -445,8 +415,7 @@ const [showAllTags, setShowAllTags] = useState(false);
 
         <style jsx>{`
           .text-glow {
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.35),
-              0 0 14px rgba(0, 0, 0, 0.25);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.35), 0 0 14px rgba(0, 0, 0, 0.25);
           }
           .dark-dropdown select {
             color-scheme: dark;
@@ -469,7 +438,7 @@ const [showAllTags, setShowAllTags] = useState(false);
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({ project }: { project: ShowcaseProject }) {
   const cover = project.cover || DEFAULT_COVER;
 
   return (
@@ -482,11 +451,7 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Imagen */}
         <div className="-mx-5 -mt-5 md:-mx-6 rounded-t-xl overflow-hidden">
           <div className="relative h-72 md:h-80">
-            <img
-              src={cover}
-              alt={`${project.title} cover`}
-              className="w-full h-full object-cover"
-            />
+            <img src={cover} alt={`${project.title} cover`} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
           </div>
         </div>
@@ -510,14 +475,10 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Título + Entregables en la MISMA línea */}
         <div className="mt-3 flex items-center justify-between pr-2">
-          <h3 className="text-left text-xl md:text-[22px] font-semibold text-foreground">
-            {project.title}
-          </h3>
+          <h3 className="text-left text-xl md:text-[22px] font-semibold text-foreground">{project.title}</h3>
           <div className="flex items-baseline gap-1 -translate-x-2 pr-4 pl-5">
             <span className="text-xs text-white/70">Entregables:</span>
-            <span className="text-2xl font-bold text-white">
-              {project.deliverables}
-            </span>
+            <span className="text-2xl font-bold text-white">{project.deliverables}</span>
           </div>
         </div>
 

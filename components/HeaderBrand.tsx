@@ -58,11 +58,15 @@ export default function Header() {
             Compartir <Share2 className="ml-2 h-4 w-4" />
           </Button>
 
-          <Link href="/contanos">
-            <Button className="bg-sky-500 hover:bg-sky-600">
-              Contanos sobre tu proyecto
-            </Button>
-          </Link>
+    <a
+  href="https://tally.so/r/3EEp02"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="self-center md:self-end w-full md:w-auto rounded-md px-10 py-2 font-medium text-white shadow-lg
+             bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:opacity-90 transition text-center"
+>
+  Contanos sobre tu proyecto
+</a>
         </div>
 
         {/* Toggle mobile */}
