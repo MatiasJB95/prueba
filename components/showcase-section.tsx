@@ -275,7 +275,7 @@ function TeamCard({ team, handleImgError, isActive = true }: TeamCardProps) {
           </div>
 
           {/* Botón */}
-          <Link href={`/projectshowcase/${team.id}`} onClick={(e) => e.stopPropagation()}>
+          <Link href={`/team/${team.id}`} onClick={(e) => e.stopPropagation()}>
             <Button
               size="sm"
               variant="outline"
