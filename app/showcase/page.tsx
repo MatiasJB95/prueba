@@ -503,7 +503,7 @@ export function ProjectCard({ project }: { project: ShowcaseProject }) {
             </div>
           </div>
 
-          <Link href={`/projectshowcase/${project.id}`}>
+          <Link href={`/team/${project.id}`}>
             <Button
               size="sm"
               variant="outline"
