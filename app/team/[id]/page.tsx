@@ -1,8 +1,7 @@
-// app/projectshowcase/[id]/page.tsx
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import rawTeams from "@/app/data/teams.json";
-import Header from "@/components/HeaderBrand";
+import { ShowcaseHeader } from "@/components/HeaderBrand";
 import { Users, FileText, Video, Clock } from "lucide-react";
 import React from "react";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
@@ -111,8 +110,12 @@ function normalizeMetric(x: any): Metric {
 }
 
 function normalizeTeam(t: any): Team {
-  const membersArr = Array.isArray(t?.members) ? t.members.map(normalizeMember) : [];
-  const metricsArr = Array.isArray(t?.metrics) ? t.metrics.map(normalizeMetric) : [];
+  const membersArr = Array.isArray(t?.members)
+    ? t.members.map(normalizeMember)
+    : [];
+  const metricsArr = Array.isArray(t?.metrics)
+    ? t.metrics.map(normalizeMetric)
+    : [];
 
   let cover: string | undefined = undefined;
   const rawCover = t?.cover ?? t?.portada;
@@ -191,8 +194,7 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
       : (params as { id: string });
 
   const teams = getTeams();
-  const team =
-    teams.find((t) => t.id === id) || teams.find((t) => slugify(t.name) === id);
+  const team = teams.find((t) => t.id === id) || teams.find((t) => slugify(t.name) === id);
 
   if (!team) return notFound();
 
@@ -202,8 +204,8 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
     .map(teamToProject);
 
   // Selección aleatoria
-const shuffled = [...projectsAll].sort(() => Math.random() - 0.5);
-const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
+  const shuffled = [...projectsAll].sort(() => Math.random() - 0.5);
+  const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
 
   const {
     name,
@@ -218,35 +220,58 @@ const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
   } = team;
 
   const allLabels = [...(tags ?? []), ...(skillNames ?? []), ...(tools ?? [])].filter(
-    (lbl) => lbl && lbl.trim() !== ""
+    (lbl) => lbl && lbl.trim() !== "",
   );
 
   return (
     <main>
       {/* Contenedor oscuro */}
-      <div className="relative mx-auto max-w-6xl px-4 py-10 text-white bg-[hsl(220,70%,3.9%)] rounded-3xl shadow-xl">
-        <Header />
+      <div
+        className={`
+    relative mx-auto w-full
+    mt-[50px]
+    text-white bg-[hsl(220,70%,3.9%)] rounded-3xl shadow-xl
+    px-4 py-10
+    max-w-[311px]
+    md:max-w-[689px]
+    lg:max-w-[904px]
+    xl:max-w-[1280px]
+    min-[1920px]:max-w-[1680px]
+  `}
+      >
+        <ShowcaseHeader shareTitle={name} />
 
         {/* Intro */}
         <section className="flex flex-col items-center justify-center text-center pt-20 pb-12">
-          <p className="text-xs uppercase tracking-wider text-white/70">{weeksLabel}</p>
-          <h1 className="mt-3 text-5xl md:text-6xl font-extrabold text-white">{name}</h1>
+          <p className=" self-stretch text-white text-center font-['DM Sans'] text-[16px] font-[400] leading-[150%] tracking-[-0.16px] ">
+            {weeksLabel}
+          </p>
+          <h1 className="mt-[12px] text-white text-center font-['DM Sans'] text-[61px] font-[700] leading-[105%] tracking-[-1.83px]">
+            {name}
+          </h1>
+          <div className="mt-[24px] flex items-center gap-3">
+            <span className="text-white font-['DM Sans'] text-[13px] font-[500] leading-[105%] tracking-[-0.13px]">
+              Para
+            </span>
 
-          <div className="mt-6 flex items-center gap-3">
-            <span className="text-white/70">Para</span>
             <Image
               src="/nocountry-logo.png"
               alt="NoCountry"
-              width={140}
-              height={40}
-              className="h-8 w-auto opacity-90"
+              width={156}
+              height={26}
               priority
+              style={{
+                width: "156.207px",
+                height: "26.216px",
+                aspectRatio: "143 / 24",
+              }}
+              className="opacity-90"
             />
           </div>
         </section>
 
         {/* Portada */}
-        <section className="relative overflow-hidden rounded-2xl border border-white/10 mt-12 mb-20">
+        <section className="relative overflow-hidden rounded-2xl border border-white/10 mt-[32px] mb-[60px]">
           <Image
             src={cover ?? "/Healthtech.png"}
             alt="Cover"
@@ -258,126 +283,187 @@ const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
         </section>
 
         {/* Descripción + Etiquetas */}
-        <section className="py-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div>
-            <h3 className="mb-3 inline-block text-xl font-semibold">Descripción</h3>
-            <p className="max-w-3xl text-white/80">{description}</p>
+        <section className="pt-6 pb-0 mb-0 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 items-start">
+          {/* Descripción (2/3) */}
+          <div className="md:col-span-2 min-w-0">
+            <h3
+              className="mb-[39px] self-stretch text-white font-['DM Sans'] text-[41px] font-[600] leading-[105%] tracking-[-1.025px]"
+              style={{
+                ["leading-trim" as any]: "both",
+                ["text-edge" as any]: "cap",
+              }}
+            >
+              Descripción
+            </h3>
+
+            <p className="max-w-none text-[#AFAFAF] font-['DM Sans'] text-[25px] font-[400] leading-[130%] tracking-[-0.25px]">
+              {description}
+            </p>
           </div>
 
-{allLabels.length > 0 && (
-  <div className="ml-0 md:ml-10 mt-4 md:mt-0">
-    <div className="flex flex-wrap gap-2 justify-start md:justify-end md:max-w-[520px]">
-      {allLabels.map((label) => (
-        <span
-          key={label}
-          className="rounded-full border border-white px-4 py-1 text-sm text-white/80"
-        >
-          {label}
-        </span>
-      ))}
-    </div>
-  </div>
-)}
+          {/* Etiquetas (1/3) */}
+          {allLabels.length > 0 && (
+            <div className="ml-0 md:ml-0 mt-4 md:mt-0 min-w-0">
+              <div className="flex flex-wrap gap-2 justify-start md:justify-end md:max-w-none">
+                {allLabels.map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-white px-4 py-1 text-sm text-white/80"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Equipo y Rendimiento */}
-        <section className="py-6">
-          <h3 className="text-xl font-semibold">Equipo y</h3>
-          <h3 className="mb-6 text-xl font-semibold">Rendimiento</h3>
-
-          {/* Header desktop */}
-          <div
-            className="hidden md:grid border-b border-white/12 px-6 py-3"
-            style={{ gridTemplateColumns: "1fr 480px" }}
+        <section className="pt-0 pb-6">
+          <h3
+            className="mt-[120px] text-white font-['DM Sans'] text-[41px] font-[600] leading-[115%] tracking-[-1.025px]"
+            style={{
+              ["leading-trim" as any]: "both",
+              ["text-edge" as any]: "cap",
+            }}
           >
-            <div className="text-[11px] uppercase tracking-wide text-white/60">Talento</div>
-            <div className="grid" style={{ gridTemplateColumns: "120px 120px 120px 120px" }}>
-              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Actividad</div>
-              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Entregables</div>
-              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Reviews</div>
-              <div className="text-[11px] uppercase tracking-wide text-white/80 text-center ml-10">Rating</div>
+            Equipo
+          </h3>
+
+          <h3
+            className="mb-[40px] text-white font-['DM Sans'] text-[41px] font-[600] leading-[115%] tracking-[-1.025px]"
+            style={{
+              ["leading-trim" as any]: "both",
+              ["text-edge" as any]: "cap",
+            }}
+          >
+            y Rendimiento
+          </h3>
+
+          {/* ===== Header desktop (md+) sin degradé, Reviews solo en xl+ ===== */}
+          <div
+            className="
+              hidden md:grid border-b border-white/12 py-3 px-6
+              [grid-template-columns:minmax(0,1fr)_120px_120px_120px]
+              xl:[grid-template-columns:minmax(0,1fr)_120px_120px_120px_120px]
+            "
+          >
+            <div className="text-white font-['DM Sans'] text-[16px] font-[600] leading-[130%] tracking-[-0.16px] ml-2">
+              Talento
+            </div>
+            <div className="text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-8">
+              Actividad
+            </div>
+            <div className="text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-8">
+              Entregables
+            </div>
+            <div className="hidden xl:block text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-9">
+              Reviews
+            </div>
+            <div className="text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-10">
+              Rating
             </div>
           </div>
 
-          {/* Body desktop (con degradé) */}
-          <div className="relative hidden md:block">
-            <div
-              className="pointer-events-none absolute inset-y-0 z-0"
-              style={{
-                background: "linear-gradient(to right, rgba(11, 58, 82, 0.5), rgba(106, 17, 77, 0.5))",
-                width: "120px",
-                left: "calc(100% - 120px)",
-              }}
-            />
-            <div className="grid" style={{ gridTemplateColumns: "1fr 480px" }}>
-              {members.map((m) => (
-                <div key={m.id} className="contents">
-                  {/* Talento */}
-                  <div className="flex items-center gap-3 px-6 py-4 border-t border-white/10 z-10">
-                    <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0">
-                      {m.avatarUrl ? (
-                        <Image src={m.avatarUrl} alt={m.name} fill className="object-cover" />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-xs text-white/60">
-                          {m.name.slice(0, 1)}
+          {/* Body desktop (con degradé SIEMPRE visible) */}
+          <div className="hidden md:block">
+            <div className="relative">
+              {/* Degradé anclado a la última columna (Rating) */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-0 w-[120px] z-0 rounded-md
+                 bg-gradient-to-r from-[rgba(11,58,82,0.45)] to-[rgba(106,17,77,0.45)]"
+              />
+              {/* 👉 Grid externo: 1fr + métricas (360px en md, 480px en xl) */}
+              <div
+                className="
+        grid relative z-10
+        md:[grid-template-columns:minmax(0,1fr)_360px]
+        xl:[grid-template-columns:minmax(0,1fr)_480px]
+      "
+              >
+                {members.map((m) => (
+                  <div key={m.id} className="contents">
+                    {/* Talento */}
+                    <div className="flex items-center gap-3 px-6 py-4 border-t border-white/10">
+                      <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0">
+                        {m.avatarUrl ? (
+                          <Image src={m.avatarUrl} alt={m.name} fill className="object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-xs text-white/60">
+                            {m.name.slice(0, 1)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="min-w-0 leading-tight">
+                        <div className="text-base font-medium truncate">{m.name}</div>
+                        <div className="text-[12px] text-white/60 truncate">
+                          {m.country ? `de ${m.country} · ${m.role}` : m.role}
                         </div>
-                      )}
+                      </div>
                     </div>
-                    <div className="min-w-0 leading-tight">
-                      <div className="text-base font-medium truncate">{m.name}</div>
-                      <div className="text-[12px] text-white/60 truncate">
-                        {m.country ? `de ${m.country} · ${m.role}` : m.role}
+
+                    {/* 👉 Métricas: 3 cols en md, 4 cols en xl */}
+                    <div
+                      className="
+              grid
+              md:[grid-template-columns:120px_120px_120px]
+              xl:[grid-template-columns:120px_120px_120px_120px]
+            "
+                    >
+                      {/* Actividad */}
+                      <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 ">
+                        {m.actividadHoras}
+                      </div>
+                      {/* Entregables */}
+                      <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4">
+                        {m.entregables}
+                      </div>
+                      {/* Reviews (oculto en md–lg para que no exista la columna) */}
+                      <div className="hidden xl:block text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4">
+                        {m.reviews}
+                      </div>
+                      {/* Rating: última columna siempre visible (3ra en md, 4ta en xl) */}
+                      <div className="text-center text-1xl font-extrabold text-white border-t border-white/10 py-4">
+                        {m.rating}
                       </div>
                     </div>
                   </div>
-
-                  {/* Métricas */}
-                  <div className="grid" style={{ gridTemplateColumns: "120px 120px 120px 120px" }}>
-                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
-                      {m.actividadHoras}
-                    </div>
-                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
-                      {m.entregables}
-                    </div>
-                    <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 z-10">
-                      {m.reviews}
-                    </div>
-                    <div className="text-center text-1xl font-extrabold text-white border-t border-white/10 py-4 z-10 w-full bg-transparent">
-                      {m.rating}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Header mobile */}
-          <div className="block md:hidden border-b border-white/12 px-6 py-2">
-            <div className="flex items-center justify-between">
-              <div className="text-[11px] uppercase tracking-wide text-white/60">Talento</div>
-              <div className="text-[11px] uppercase tracking-wide text-white/80">Rating</div>
+          {/* ===== Header mobile (<md) ===== */}
+          <div className="md:hidden border-b border-white/10 px-4 sm:px-6 py-2">
+            <div className="grid grid-cols-[1fr_auto] items-center">
+              <div className="text-white font-['DM Sans'] text-[16px] font-[600] leading-[130%] tracking-[-0.16px]">
+                Talento
+              </div>
+              <div className="text-white font-['DM Sans'] text-[16px] font-[600] leading-[130%] tracking-[-0.16px] text-right">
+                Rating
+              </div>
             </div>
           </div>
 
-          {/* Body mobile (solo rating) */}
-          <div className="relative block md:hidden">
-            {members.map((m) => (
-              <div
-                key={m.id}
-                className="relative flex items-center justify-between border-t border-white/10 px-6 py-4"
-              >
-                {/* franja detrás del rating (fila) */}
+          {/* Body mobile (rating con franja completa) */}
+          <div className="relative md:hidden">
+            {/* Degradé fijo a la derecha, ocupa toda la altura de las filas */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 right-0 z-0
+               w-[96px] sm:w-[110px]
+               bg-gradient-to-r from-[rgba(11,58,82,0.45)] to-[rgba(106,17,77,0.45)]"
+            />
+            <div className="relative z-10">
+              {members.map((m) => (
                 <div
-                  className="pointer-events-none absolute inset-y-0 right-0 w-24"
-                  style={{
-                    background:
-                      "linear-gradient(to right, rgba(11,58,82,0.5), rgba(106,17,77,0.5))",
-                  }}
-                />
-
-                {/* Avatar + Nombre */}
-                <div className="flex items-center gap-3 z-10">
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0">
+                  key={m.id}
+                  className="grid grid-cols-[auto_1fr_auto] items-center gap-3
+                   border-t border-white/10 px-4 sm:px-6 py-4"
+                >
+                  {/* Avatar */}
+                  <div className="relative h-10 w-10 overflow-hidden rounded-full bg-white/10 shrink-0 max-[360px]:h-8 max-[360px]:w-8">
                     {m.avatarUrl ? (
                       <Image src={m.avatarUrl} alt={m.name} fill className="object-cover" />
                     ) : (
@@ -386,25 +472,35 @@ const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
                       </div>
                     )}
                   </div>
+
+                  {/* Talento: País en una línea y Rol debajo (si hay país) */}
                   <div className="min-w-0 leading-tight">
                     <div className="text-base font-medium truncate">{m.name}</div>
-                    <div className="text-[12px] text-white/60 truncate">
-                      {m.country ? `de ${m.country} · ${m.role}` : m.role}
+                    <div className="text-[12px] text-white/60">
+                      {m.country ? (
+                        <>
+                          <span className="block">de {m.country}</span>
+                          <span className="block">{m.role}</span>
+                        </>
+                      ) : (
+                        <span className="block">{m.role}</span>
+                      )}
                     </div>
                   </div>
-                </div>
 
-                {/* Rating */}
-                <div className="text-xl font-extrabold text-white z-10">{m.rating}</div>
-              </div>
-            ))}
+                  {/* Rating (columna derecha sobre el degradé) */}
+                  <div className="text-2xl max-[360px]:text-xl font-extrabold text-white text-right w-[96px] sm:w-[110px]">
+                    {m.rating}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* ===== Métricas del equipo (globales del JSON) ===== */}
-        <section className="pt-8 mt-4">
-          <h3 className="sr-only">Métricas del equipo</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Métricas del equipo */}
+        <section className="w-full flex items-center py-10">
+          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-8">
             {/* Tamaño de equipo */}
             {(() => {
               const m = findMetric(metrics, ["tamaño de equipo", "tamano de equipo", "team size"]);
@@ -455,7 +551,6 @@ const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
               const m = findMetric(metrics, ["tiempo total", "horas", "simulado"]);
               const val = metricNumber(m?.value);
               const unit = (m?.sublabel ?? "").toString().toLowerCase().includes("hora") ? "horas" : "";
-
               return (
                 <div className="flex flex-col items-center text-center">
                   <div className="flex items-center gap-2">
@@ -473,71 +568,182 @@ const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
         </section>
 
         {/* CTA full-width (full-bleed) dentro del contenedor */}
-        <section className="relative mx-[calc(50%-50vw)] w-screen bg-white text-black py-10 px-6 md:px-12 mt-10 rounded-none">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <section className="relative mx-[calc(50%-50vw)] w-screen bg-white text-black py-[52px] px-6 md:px-12 mt-[120px] rounded-none">
+          <div
+            className={`
+    mx-auto
+    max-w-[311px]
+    md:max-w-[689px]
+    lg:max-w-[904px]
+    xl:max-w-[1280px]
+    min-[1920px]:max-w-[1680px]
+    grid grid-cols-1 md:grid-cols-2 gap-8 items-center
+  `}
+          >
             {/* Columna izquierda */}
             <div>
-              <h3 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight">
-                ¿Tenés un
-                <br />
-                desafío similar?
+              <h3
+                className="
+    text-black
+    font-['DM_Sans']
+    text-[39px]
+    font-semibold
+    leading-[110%]
+    tracking-[-0.975px]
+    mb-8 
+  "
+                style={{
+                  ["leading-trim" as any]: "both",
+                  ["text-edge" as any]: "cap",
+                }}
+              >
+                ¿Tenés un <br /> desafío similar?
               </h3>
-              <p className="text-gray-700 text-base md:text-lg max-w-md">
-                Contanos sobre tu proyecto o desafío para que miles de talentos puedan
-                proveer soluciones a tus desafíos particulares.
+
+              <p
+                className="
+    text-[#5E5E5E]
+    font-['DM_Sans']
+    text-[23px]
+    font-normal
+    leading-[105%]
+    tracking-[-0.23px]
+    max-w-md
+  "
+              >
+                Contanos sobre tu proyecto o desafío para que miles de talentos puedan proveer soluciones a tus desafíos particulares.
               </p>
             </div>
 
             {/* Columna derecha */}
-            <div className="flex flex-col justify-between h-full md:items-end text-sm md:text-base">
-              <p className="text-gray-600 text-center md:text-right">
-                Si tenés alguna pregunta sobre tu <br /> proyecto, por favor{" "}
-                <span className="font-semibold text-black underline">contactanos</span>
-              </p>
+<div className="flex flex-col md:items-end text-sm md:text-base gap-[24px] md:gap-[108px]">
+  {/* Botón primero en mobile */}
+  <a
+    href="https://tally.so/r/3EEp02"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      order-1 md:order-2
+      self-center md:self-end
+      w-full md:w-auto
+      rounded-md
+      px-10 py-3
+      font-medium
+      text-white
+      shadow-lg
+      bg-gradient-to-r from-sky-600 to-fuchsia-600
+      hover:opacity-90
+      transition
+      text-center
+    "
+  >
+    Contanos sobre tu proyecto
+  </a>
 
-              <a
-                href="https://tally.so/r/3EEp02"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-center md:self-end w-full md:w-auto rounded-md px-10 py-3 font-medium text-white shadow-lg
-                           bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:opacity-90 transition text-center"
-              >
-                Contanos sobre tu proyecto
-              </a>
-            </div>
+  {/* Texto después en mobile */}
+  <p
+    className="
+      order-2 md:order-1
+      text-center md:text-right
+      text-[#5E5E5E]
+      font-['DM_Sans']
+      text-[16px]
+      font-normal
+      leading-[130%]
+      tracking-[-0.16px]
+    "
+  >
+    Si tenés alguna pregunta sobre tu <br /> proyecto, por favor{" "}
+    <span
+      className="
+        font-semibold
+        text-black
+        underline
+        font-['DM_Sans']
+        text-[16px]
+        leading-[130%]
+        tracking-[-0.16px]
+      "
+    >
+      contactanos
+    </span>
+  </p>
+</div>
           </div>
         </section>
 
-{/* Otros proyectos – 3 aleatorias; 3→2→1 según ancho automáticamente */}
-<section className="relative mx-[calc(50%-50vw)] w-screen py-10 px-2">
-  <div className="mx-auto max-w-[1320px] px-2">
-    <header className="mb-4 md:mb-6">
-      <span className="block text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/70">
-        Otros proyectos
-      </span>
-      <h3 className="mt-2 text-xl font-semibold text-white">
-        Proyectos que<br /> podrían interesarte
-      </h3>
-    </header>
+        {/* Otros proyectos — centrado, sin solapes y sin cortes a la derecha */}
+        <section className="relative w-full overflow-x-clip py-10 mt-[120px] ">
+          <div
+            className={`
+      mx-auto w-full
+      max-w-[311px]
+      md:max-w-[689px]
+      lg:max-w-[904px]
+      xl:max-w-[1280px]
+      min-[1920px]:max-w-[1680px]
+      px-2 sm:px-3 md:px-4
+    `}
+          >
+            <header className="mb-4 md:mb-6">
+              <span
+                className="
+    block
+    self-stretch
+    text-white
+    font-['DM_Sans']
+    text-[20px]
+    font-light
+    leading-[105%]
+    tracking-[-0.5px]
+  "
+                style={{ ["leading-trim" as any]: "both", ["text-edge" as any]: "cap" }}
+              >
+                Otros
+              </span>
+              <h3
+                className="
+    mt-6
+    text-white
+    font-['DM_Sans']
+    text-[41px]
+    font-semibold
+    leading-[105%]
+    tracking-[-1.025px]
+  "
+                style={{ ["leading-trim" as any]: "both", ["text-edge" as any]: "cap" }}
+              >
+                Proyectos que
+                <br /> podrían interesarte
+              </h3>
+            </header>
 
-<div className={styles.row}>
-  {pick3.map((p, i) => (
-    <div
-      key={p.id}
-      className={
-        i === 0
-          ? ""                    // 1ª: siempre visible
-          : i === 1
-          ? "hidden lg:block"     // 2ª: solo desde lg (>=1024px)
-          : "hidden xl:block"     // 3ª: solo desde xl (>=1280px)
-      }
-    >
-      <ProjectCard project={p} />
-    </div>
-  ))}
-</div>
-  </div>
-</section>
+            <div
+              className="
+    grid w-full
+    mt-[60px]
+    grid-cols-1 lg:grid-cols-2 xl:grid-cols-3
+    gap-x-6 gap-y-8
+    justify-items-stretch place-items-stretch
+    [&>*]:min-w-0 [&>*]:w-full [&>*]:box-border
+  "
+            >
+              {/* Siempre mostramos 2 primeras */}
+              {pick3.slice(0, 2).map((p) => (
+                <div key={p.id}>
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+
+              {/* La 3ª solo desde xl (≥1280) */}
+              {pick3[2] && (
+                <div className="hidden xl:block">
+                  <ProjectCard project={pick3[2]} />
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
