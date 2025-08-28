@@ -16,7 +16,6 @@ export default function Home() {
       <main className="">
         <CompaniesHero />
       </main>
-//
       <Footer />
     </div>
   );
