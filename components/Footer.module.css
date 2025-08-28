@@ -1,0 +1,84 @@
+/* Contenedor externo: paddings + alturas por breakpoint (Figma) */
+.footerShell {
+  width: 100%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  /* base mobile */
+  padding: 80px 32px 40px 32px;
+  min-height: auto;
+}
+
+/* >=768: padding 60, alto ~390 */
+@media (min-width: 768px) {
+  .footerShell {
+    padding-left: 60px;
+    padding-right: 60px;
+    min-height: 390px;
+  }
+}
+
+/* >=1020: padding 60, alto ~383 */
+@media (min-width: 1020px) {
+  .footerShell {
+    padding-left: 60px;
+    padding-right: 60px;
+    min-height: 383px;
+  }
+}
+
+/* 1280–1439: SIN padding lateral para que el inner llegue a 1280 */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .footerShell {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* >=1440: padding 80, alto ~272 */
+@media (min-width: 1440px) {
+  .footerShell {
+    padding-left: 80px;
+    padding-right: 80px;
+    min-height: 272px;
+  }
+}
+
+/* >=1920: padding 120, alto ~290 */
+@media (min-width: 1920px) {
+  .footerShell {
+    padding-left: 120px;
+    padding-right: 120px;
+    min-height: 290px;
+  }
+}
+
+/* Contenedor interno: anchos útiles exactos y layout columna + gap */
+.footerInner {
+  width: 100%;
+  max-width: 310px;  /* <764 => 310 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; /* 32px */
+}
+
+/* 764–1019 => 686 */
+@media (min-width: 764px) {
+  .footerInner { max-width: 686px; }
+}
+
+/* 1020–1279 => 904 */
+@media (min-width: 1020px) {
+  .footerInner { max-width: 904px; }
+}
+
+/* >=1280 => 1280 */
+@media (min-width: 1280px) {
+  .footerInner { max-width: 1280px; }
+}
+
+/* >=1920 => 1680 */
+@media (min-width: 1920px) {
+  .footerInner { max-width: 1680px; }
+}
