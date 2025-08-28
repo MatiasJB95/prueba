@@ -1,5 +1,5 @@
 import { CompaniesHero } from "@/components/companies/companies-hero";
-import  Header  from "@/components/header";
+import { ShowcaseHeader } from "@/components/showcase-header";
 import Footer from "@/components/footer"; // 👈
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
         <div className="absolute left-1/3 bottom-0 w-72 h-72 bg-gradient-radial from-cyan-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <Header />
+      <ShowcaseHeader />
       <main className="">
         <CompaniesHero />
       </main>
