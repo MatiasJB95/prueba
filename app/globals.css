@@ -41,6 +41,7 @@ html, body { background: #0b0f14; }
 @layer base {
   * {
     @apply border-border;
+    html { scrollbar-gutter: stable; }
   }
   body {
     @apply bg-background text-foreground;
@@ -86,3 +87,9 @@ html, body { background: #0b0f14; }
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+.nc-shell { width: 312px; margin-inline: auto; }           /* ~375 */
+@media (min-width: 768px)  { .nc-shell { width: 688px; } }  /* 768 */
+@media (min-width: 1024px) { .nc-shell { width: 904px; } }  /* 1024 */
+@media (min-width: 1280px) { .nc-shell { width: 1280px; } } /* 1440 */
+@media (min-width: 1920px) { .nc-shell { width: 1680px; } } /* 1920 */
