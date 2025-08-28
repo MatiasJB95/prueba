@@ -1,133 +1,96 @@
-// components/Footer.tsx
-import { Linkedin, Instagram } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Linkedin, Instagram } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./Footer.module.css"; // 👈 CSS Module (sin styled-jsx)
 
 export default function Footer() {
   return (
-    <footer
-      className="
-        relative z-[60] isolate w-full
-        bg-[hsl(220,70%,3.9%)] text-white
-        pl-[59px] pr-[22px] py-8 mt-6
-      "
+    <footer className="relative z-[60] isolate w-full bg-[hsl(220,70%,3.9%)] text-white mt-6">
+      {/* Shell: padding/altura por breakpoint */}
+      <div className={styles.footerShell}>
+        {/* Inner: anchos útiles por breakpoint + columna + gap */}
+        <div className={styles.footerInner}>
+{/* Fila principal: grid en mobile, flex desde md */}
+<div className="w-full grid grid-cols-2 gap-8 items-start md:flex md:flex-wrap md:items-start md:justify-between">
+  {/* Showcase → col 1, fila 1 */}
+  <div className="flex flex-col max-[764px]:col-start-1 max-[764px]:row-start-1 max-[764px]:justify-self-start">
+    <h4 className="font-semibold mb-3">
+      <Link
+        href="/showcase"
+        className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 rounded"
+      >
+        Showcase
+      </Link>
+    </h4>
+  </div>
+
+  {/* Plataforma → col 2, fila 1 (alineada con Compañía en col 2) */}
+  <div className="flex flex-col max-[764px]:col-start-2 max-[764px]:row-start-1 max-[764px]:justify-self-start">
+    <h4 className="font-semibold mb-3">
+      <a
+        href="https://talent.nocountry.tech/dashboard"
+        className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 rounded"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Plataforma
+      </a>
+    </h4>
+  </div>
+
+  {/* Contacto → col 1, fila 2 */}
+  <div className="flex flex-col max-[764px]:col-start-1 max-[764px]:row-start-2 max-[764px]:justify-self-start">
+    <h4 className="font-semibold mb-3">Contacto</h4>
+    <ul className="space-y-2 text-white/80">
+      <li className="text-xs break-words">contacto@nocountry.io</li>
+    </ul>
+  </div>
+
+  {/* Compañía → col 2, fila 2 (misma columna que Plataforma) */}
+  <div className="flex flex-col max-[764px]:col-start-2 max-[764px]:row-start-2 max-[764px]:justify-self-start">
+    <h4 className="font-semibold mb-3">Compañía</h4>
+    <ul className="space-y-2 text-white/80">
+      <li className="text-xs">Términos y condiciones</li>
+    </ul>
+  </div>
+
+  {/* Seguinos → col 1, fila 3 */}
+  <div className="flex flex-col max-[764px]:col-start-1 max-[764px]:row-start-3 max-[764px]:justify-self-start">
+    <h4 className="font-semibold mb-3">Seguinos</h4>
+    <div className="flex gap-4">
+      {/* tus íconos */}
+    </div>
+  </div>
+
+  {/* CTA + Logo + lema → ancho completo en mobile (2 columnas), fila 4 */}
+  <div className="flex flex-col items-start md:items-center gap-3 shrink-0 w-full sm:w-auto max-[764px]:col-span-2 max-[764px]:row-start-4 max-[764px]:justify-self-stretch">
+    <a
+      href="https://tally.so/r/3EEp02"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full sm:w-auto rounded-md px-6 py-2 font-medium text-white shadow-lg
+                 bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:opacity-90 transition text-center
+                 mb-6 md:mb-8"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Fila principal (todo alineado en la misma altura) */}
-        <div className="flex flex-wrap items-start justify-between gap-8">
-          {/* Showcase */}
-          <div className="flex flex-col">
-            <h4 className="font-semibold mb-3">
-              <Link
-                href="/showcase"
-                className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 rounded"
-              >
-                Showcase
-              </Link>
-            </h4>
+      Contanos sobre tu proyecto
+    </a>
+
+    <div className="flex items-center gap-4">
+      <Image src="/nocountry-logo.png" alt="No Country" width={90} height={30} className="h-8 w-auto" />
+      <div className="h-12 w-px bg-white/25" />
+      <span className="text-xs leading-tight text-white/70 whitespace-pre-line">
+        Evidenciamos{"\n"}el valor del{"\n"}talento digital
+      </span>
+    </div>
+  </div>
+</div>
+
+          {/* Copyright */}
+          <div className="w-full mt-6 pt-4 border-t border-white text-xs text-white/60 text-center md:text-left">
+            © {new Date().getFullYear()} No Country — Todos los derechos reservados
           </div>
-
-          {/* Plataforma */}
-          <div className="flex flex-col">
-            <h4 className="font-semibold mb-3">
-              <a
-                href="https://talent.nocountry.tech/dashboard"
-                className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 rounded"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Plataforma
-              </a>
-            </h4>
-          </div>
-
-          {/* Contacto */}
-          <div className="flex flex-col">
-            <h4 className="font-semibold mb-3">Contacto</h4>
-            <ul className="space-y-2 text-white/80">
-              <li className="text-xs">contacto@nocountry.io</li>
-            </ul>
-          </div>
-
-          {/* Compañía */}
-          <div className="flex flex-col">
-            <h4 className="font-semibold mb-3">Compañía</h4>
-            <ul className="space-y-2 text-white/80">
-              <li className="text-xs">Términos y condiciones</li>
-            </ul>
-          </div>
-
-          {/* Seguinos */}
-          <div className="flex flex-col">
-            <h4 className="font-semibold mb-3">Seguinos</h4>
-            <div className="flex gap-4">
-              <a
-                href="https://www.linkedin.com/company/nocountrytalent"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.instagram.com/nocountry.tech/?hl=es"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://discord.com/invite/eFQ5DZM7DV"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                aria-label="Discord"
-                title="Discord"
-              >
-                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.37c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* CTA + Logo + lema */}
-          <div className="flex flex-col items-start md:items-center gap-3 shrink-0 w-full sm:w-auto">
-            <a
-              href="https://tally.so/r/3EEp02"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto rounded-md px-6 py-2 font-medium text-white shadow-lg
-                         bg-gradient-to-r from-sky-600 to-fuchsia-600 hover:opacity-90 transition text-center
-                         mb-6 md:mb-8"
-            >
-              Contanos sobre tu proyecto
-            </a>
-
-            <div className="flex items-center gap-4">
-              <Image
-                src="/nocountry-logo.png"
-                alt="No Country"
-                width={90}
-                height={30}
-                className="h-8 w-auto"
-              />
-              <div className="h-12 w-px bg-white/25" />
-              <span className="text-xs leading-tight text-white/70 whitespace-pre-line">
-                Evidenciamos{"\n"}el valor del{"\n"}talento digital
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-6 pt-4 border-t border-white text-xs text-white/60 text-center md:text-left">
-          © {new Date().getFullYear()} No Country — Todos los derechos reservados
         </div>
       </div>
     </footer>
-  )
+  );
 }
