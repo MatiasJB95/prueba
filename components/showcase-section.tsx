@@ -105,46 +105,45 @@ export default function ShowcaseSection() {
 
   return (
 <section
-  className="relative z-10 bg-transparent overflow-hidden pb-2 md:pb-3 pt-[164px]"
+  className="relative z-10 bg-transparent overflow-hidden pb-2 md:pb-3 pt-[calc(120px+5rem+12px)]"
   data-section="showcase"
 >
-    {/* Contenedor con anchos fijos por breakpoint */}
-    <div
-      className="
-        mx-auto w-full
-        max-w-[312px]
-        md:max-w-[688px]
-        lg:max-w-[904px]
-        xl:max-w-[1280px]
-        min-[1920px]:max-w-[1680px]
-      "
-    >
-      {/* Header del bloque (sin margen-top) */}
-      <div className="mb-5 text-center">
-        <div className="space-y-6">
-          <span className="font-sans font-light text-[20px] leading-none tracking-[0.2em] text-white block m-0 p-0">
-            Últimos
-          </span>
-          <h2 className="font-sans font-bold text-[34px] md:text-[48px] lg:text-[61px] leading-[1.1] mb-0">
-            Proyectos Destacados
-          </h2>
-        </div>
+  {/* Contenedor con anchos fijos por breakpoint */}
+  <div
+    className="
+      mx-auto w-full
+      max-w-[312px]
+      md:max-w-[688px]
+      lg:max-w-[904px]
+      xl:max-w-[1280px]
+      min-[1920px]:max-w-[1680px]
+    "
+  >
+    <div className="mb-20 w-fit mx-auto flex flex-col items-center text-center">
+      {/* "Últimos" */}
+      <span className="inline-flex leading-none text-stone-50 text-xl font-light font-['DM_Sans']">
+        Últimos
+      </span>
 
-        <p className="mt-9 mb-20 text-[25px] leading-[1.2] tracking-[-0.625px] text-center text-white font-normal">
-          Encontra los mejores proyectos
-          <br className="hidden sm:block" />
-          de nuestra comunidad
-        </p>
-      </div>
+      <div className="mt-[1rem] flex flex-col items-center">
+        <span className="inline-flex leading-none text-stone-50 text-6xl font-bold font-['DM_Sans']">
+          Proyectos Destacados
+        </span>
 
-      {/* Grid responsivo */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {teams.map((team) => (
-          <TeamCard key={team.id} team={team} />
-        ))}
+        <span className="inline-flex mt-[1.5rem] leading-none text-center text-stone-50 text-2xl font-normal font-['DM_Sans'] max-w-[24rem]">
+          Encontra los mejores proyectos de nuestra comunidad
+        </span>
       </div>
     </div>
-  </section>
+
+    {/* Grid responsivo */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {teams.map((team) => (
+        <TeamCard key={team.id} team={team} />
+      ))}
+    </div>
+  </div>
+</section>
 );
 }
 
@@ -163,14 +162,14 @@ function TeamCard({ team }: TeamCardProps) {
       >
         {/* Imagen */}
         <div className="-mx-5 -mt-5 md:-mx-6 rounded-t-xl overflow-hidden">
-          <div className="relative h-64 md:h-72">
+          <div className="relative w-full aspect-[16/9] xl:w-[828px] xl:h-[465.75px] xl:mx-auto">
             <img
               src={cover}
               alt={`${team.projectType} cover`}
               className="w-full h-full object-cover"
               onError={(e) => {
                 const img = e.currentTarget as HTMLImageElement;
-                if (!img.src.endsWith(PLACEHOLDER_AVATAR)) img.src = PLACEHOLDER_AVATAR;
+                if (!img.src.endsWith(DEFAULT_COVER)) img.src = DEFAULT_COVER;
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
@@ -183,13 +182,14 @@ function TeamCard({ team }: TeamCardProps) {
             {Array.isArray(team.roles) &&
               team.roles.length > 0 &&
               team.roles.slice(0, 2).map((t, i) => (
-                <Badge
+                <span
                   key={"role-" + i}
-                  variant="outline"
-                  className="px-3 py-1 text-[10px] sm:text-xs bg-white/20 border border-white/40 !text-white font-semibold rounded-full backdrop-blur-0 shadow-md"
+                  className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex items-center justify-center"
                 >
-                  {t}
-                </Badge>
+                  <span className="text-zinc-200 text-base sm:text-lg md:text-xl font-normal leading-tight">
+                    {t}
+                  </span>
+                </span>
               ))}
           </div>
 
@@ -205,11 +205,16 @@ function TeamCard({ team }: TeamCardProps) {
 
         {/* Footer */}
         <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
+          {/* Por + avatares (REDONDOS) */}
           <div className="flex items-center gap-3">
             <span className="text-xs text-white">Por:</span>
             <div className="flex -space-x-3">
               {team.members.slice(0, 5).map((m, i) => (
-                <div key={i} className="h-9 w-9 rounded-full border-2 border-background overflow-hidden shadow-md">
+                <div
+                  key={i}
+                  className="h-9 w-9 rounded-full border-2 border-background overflow-hidden shadow-md"
+                  title={m.name}
+                >
                   <img
                     src={m.avatar || PLACEHOLDER_AVATAR}
                     alt={m.name}
@@ -225,14 +230,18 @@ function TeamCard({ team }: TeamCardProps) {
             </div>
           </div>
 
+          {/* Botón con BORDE DEGRADADO */}
           <Link href={`/team/${team.id}`} onClick={(e) => e.stopPropagation()}>
-            <Button
-              size="sm"
-              variant="outline"
-              className="h-9 px-4 rounded-md bg-card/60 text-white border border-white/60 hover:bg-card/80 hover:border-white/80 shadow-sm"
-            >
-              Ver proyecto
-            </Button>
+            <div className="p-[1.5px] rounded-md bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600">
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-9 px-4 rounded-md bg-gray-900 text-stone-50 font-semibold
+                           !border-0 hover:bg-gray-900/90"
+              >
+                Ver proyecto
+              </Button>
+            </div>
           </Link>
         </div>
       </div>
