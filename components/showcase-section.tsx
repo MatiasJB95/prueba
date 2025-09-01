@@ -156,7 +156,7 @@ function TeamCard({ team }: TeamCardProps) {
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-lg shadow-black/20 bg-card w-[828px]">
-      {/* Imagen FULL-BLEED, sin padding, exacta 828 x 465.75 */}
+      {/* Imagen FULL-BLEED, */}
       <div className="rounded-t-xl overflow-hidden">
         <div className="relative w-[828px] h-[445.75px] mx-auto">
           <img
@@ -174,7 +174,7 @@ function TeamCard({ team }: TeamCardProps) {
 
       {/* Contenido con padding y 32px desde la imagen */}
       <div className="mt-auto px-5 md:px-6 pb-3">
-        {/* Fila: Etiquetas (izq) + Entregables (der) */}
+        {/* Fila:  */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 flex-wrap">
             {Array.isArray(team.roles) &&
@@ -206,7 +206,7 @@ function TeamCard({ team }: TeamCardProps) {
           {team.projectType}
         </h3>
 
-        {/* Footer (con padding heredado del wrapper) */}
+        {/* Footer */}
         <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
           <div className="flex items-center gap-3">
             <span className="text-stone-50 text-sm font-medium font-['DM_Sans'] leading-none">
