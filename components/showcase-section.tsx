@@ -176,75 +176,83 @@ function TeamCard({ team }: TeamCardProps) {
           </div>
         </div>
 
-        {/* Roles + título + entregables */}
-        <div className="mt-5 grid grid-cols-[1fr_auto] grid-rows-[auto_auto] items-start gap-y-2">
-          <div className="flex gap-2 flex-wrap items-center">
-            {Array.isArray(team.roles) &&
-              team.roles.length > 0 &&
-              team.roles.slice(0, 2).map((t, i) => (
-                <span
-                  key={"role-" + i}
-                  className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex items-center justify-center"
-                >
-                  <span className="text-zinc-200 text-base sm:text-lg md:text-xl font-normal leading-tight">
-                    {t}
-                  </span>
-                </span>
-              ))}
-          </div>
+ {/* ===== Fila 1: Etiquetas (izq) + Entregables (der) ===== */}
+<div className="mt-5 flex items-center justify-between gap-4">
+  {/* Etiquetas (borde/píldora según Figma) */}
+  <div className="flex items-center gap-2 flex-wrap">
+    {Array.isArray(team.roles) &&
+      team.roles.length > 0 &&
+      team.roles.slice(0, 2).map((t, i) => (
+        <span
+          key={`role-${i}`}
+          className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex justify-center items-center gap-2.5"
+        >
+          <span className="justify-start text-zinc-200 text-xl font-normal font-['DM_Sans']">
+            {t}
+          </span>
+        </span>
+      ))}
+  </div>
 
-          <h3 className="row-start-2 col-start-1 text-left text-xl md:text-[22px] font-semibold text-foreground">
-            {team.projectType}
-          </h3>
+  {/* Entregables (clases exactas de Figma) */}
+  <div className="inline-flex items-center gap-2">
+    <span className="text-stone-50 text-xl font-normal font-['DM_Sans'] leading-loose">
+      Entregables:
+    </span>
+    <span className="text-stone-50 text-4xl font-bold font-['DM_Sans'] leading-10">
+      {team.deliverables}
+    </span>
+  </div>
+</div>
 
-          <div className="row-start-2 col-start-2 flex items-baseline gap-1 pr-7">
-            <span className="text-xs text-white/70">Entregables:</span>
-            <span className="text-2xl font-bold text-white">{team.deliverables}</span>
-          </div>
-        </div>
+        {/* ===== Título (debajo) ===== */}
+<h3 className="text-stone-50 text-4xl font-semibold font-['DM_Sans'] leading-10">
+  {team.projectType}
+</h3>
 
         {/* Footer */}
         <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
-          {/* Por + avatares (REDONDOS) */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-white">Por:</span>
-            <div className="flex -space-x-3">
-              {team.members.slice(0, 5).map((m, i) => (
-                <div
-                  key={i}
-                  className="h-9 w-9 rounded-full border-2 border-background overflow-hidden shadow-md"
-                  title={m.name}
-                >
-                  <img
-                    src={m.avatar || PLACEHOLDER_AVATAR}
-                    alt={m.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-              {team.members.length > 5 && (
-                <div className="h-9 w-9 rounded-full border-2 border-background bg-black/60 text-white flex items-center justify-center text-[10px] font-bold shadow-md">
-                  +{team.members.length - 5}
-                </div>
-              )}
-            </div>
-          </div>
+          {/* Por + avatares redondos */}
+<div className="flex items-center gap-3">
+  <span className="text-stone-50 text-sm font-medium font-['DM_Sans'] leading-none">
+    Por
+  </span>
+  <div className="flex -space-x-3">
+    {team.members.slice(0, 5).map((m, i) => (
+      <div
+        key={i}
+        className="w-9 h-9 rounded-full border border-zinc-500 overflow-hidden"
+        title={m.name}
+      >
+        <img
+          src={m.avatar || PLACEHOLDER_AVATAR}
+          alt={m.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    ))}
+    {team.members.length > 5 && (
+      <div className="w-9 h-9 rounded-full border border-zinc-500 bg-black/60 text-white flex items-center justify-center text-[10px] font-bold">
+        +{team.members.length - 5}
+      </div>
+    )}
+  </div>
+</div>
 
-          {/* Botón con BORDE DEGRADADO */}
-          <Link href={`/team/${team.id}`} onClick={(e) => e.stopPropagation()}>
-            <div className="p-[1.5px] rounded-md bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-9 px-4 rounded-md bg-gray-900 text-stone-50 font-semibold
-                           !border-0 hover:bg-gray-900/90"
-              >
-                Ver proyecto
-              </Button>
-            </div>
-          </Link>
+          {/* Botón con borde degradado */}
+<Link href={`/team/${team.id}`} onClick={(e) => e.stopPropagation()}>
+  {/* Degradé corregido: izquierda → derecha */}
+<div className="rounded-md p-[1.5px] bg-gradient-to-r from-[#02BEED] via-[#646EF6] to-[#FF0094] hover:brightness-110 transition">
+  <div className="px-6 py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2.5">
+    <div className="text-stone-50 text-xl font-semibold font-['DM_Sans'] leading-tight">
+      Ver proyecto
+    </div>
+  </div>
+</div>
+</Link>
         </div>
       </div>
     </div>
   );
 }
+
