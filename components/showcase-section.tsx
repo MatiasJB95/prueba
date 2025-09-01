@@ -155,67 +155,59 @@ function TeamCard({ team }: TeamCardProps) {
   const cover = team.coverImage || DEFAULT_COVER;
 
   return (
-    <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-lg shadow-black/20 bg-card">
-      <div
-        className="h-full p-5 md:p-6 flex flex-col cursor-pointer"
-        onClick={() => (window.location.href = `/team/${team.id}`)}
-      >
-        {/* Imagen EXACTA 828 x 465.75 */}
-        <div className="rounded-t-xl overflow-hidden">
-          <div className="relative w-[828px] h-[400.75px] mx-auto">
-            <img
-              src={cover}
-              alt={`${team.projectType} cover`}
-              className="absolute inset-0 w-full h-full object-cover"
-              onError={(e) => {
-                const img = e.currentTarget as HTMLImageElement;
-                if (!img.src.endsWith(DEFAULT_COVER)) img.src = DEFAULT_COVER;
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
-          </div>
+    <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-lg shadow-black/20 bg-card w-[828px]">
+      {/* Imagen FULL-BLEED, sin padding, exacta 828 x 465.75 */}
+      <div className="rounded-t-xl overflow-hidden">
+        <div className="relative w-[828px] h-[445.75px] mx-auto">
+          <img
+            src={cover}
+            alt={`${team.projectType} cover`}
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement;
+              if (!img.src.endsWith(DEFAULT_COVER)) img.src = DEFAULT_COVER;
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
         </div>
+      </div>
 
-        {/* 32px entre imagen y contenido */}
-        <div className="mt-8">
-          {/* Fila: Etiquetas (izq) + Entregables (der) */}
-          <div className="flex items-center justify-between gap-4">
-            {/* Etiquetas */}
-            <div className="flex items-center gap-2 flex-wrap">
-              {Array.isArray(team.roles) &&
-                team.roles.length > 0 &&
-                team.roles.slice(0, 2).map((t, i) => (
-                  <span
-                    key={`role-${i}`}
-                    className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex justify-center items-center gap-2.5"
-                  >
-                    <span className="justify-start text-zinc-200 text-xl font-normal font-['DM_Sans'] leading-tight">
-                      {t}
-                    </span>
+      {/* Contenido con padding y 32px desde la imagen */}
+      <div className="mt-auto px-5 md:px-6 pb-3">
+        {/* Fila: Etiquetas (izq) + Entregables (der) */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            {Array.isArray(team.roles) &&
+              team.roles.length > 0 &&
+              team.roles.slice(0, 2).map((t, i) => (
+                <span
+                  key={`role-${i}`}
+                  className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex justify-center items-center gap-2.5"
+                >
+                  <span className="text-zinc-200 text-xl font-normal font-['DM_Sans'] leading-tight">
+                    {t}
                   </span>
-                ))}
-            </div>
-
-            {/* Entregables (exacto Figma) */}
-            <div className="inline-flex items-center gap-2">
-              <span className="text-stone-50 text-xl font-normal font-['DM_Sans'] leading-loose">
-                Entregables:
-              </span>
-              <span className="text-stone-50 text-4xl font-bold font-['DM_Sans'] leading-10">
-                {team.deliverables}
-              </span>
-            </div>
+                </span>
+              ))}
           </div>
 
-          {/* Título */}
-          <h3 className="mt-2 text-stone-50 text-4xl font-semibold font-['DM_Sans'] leading-10">
-            {team.projectType}
-          </h3>
+          <div className="inline-flex items-center gap-2">
+            <span className="text-stone-50 text-xl font-normal font-['DM_Sans'] leading-loose">
+              Entregables:
+            </span>
+            <span className="text-stone-50 text-4xl font-bold font-['DM_Sans'] leading-10">
+              {team.deliverables}
+            </span>
+          </div>
         </div>
 
-        {/* Footer */}
-      <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
-          {/* Por + avatares redondos */}
+        {/* Título */}
+        <h3 className="mt-2 text-stone-50 text-4xl font-semibold font-['DM_Sans'] leading-10">
+          {team.projectType}
+        </h3>
+
+        {/* Footer (con padding heredado del wrapper) */}
+        <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
           <div className="flex items-center gap-3">
             <span className="text-stone-50 text-sm font-medium font-['DM_Sans'] leading-none">
               Por
@@ -242,7 +234,6 @@ function TeamCard({ team }: TeamCardProps) {
             </div>
           </div>
 
-          {/* Botón con borde degradado (L→R: #02BEED → #646EF6 → #FF0094) */}
           <Link href={`/team/${team.id}`} onClick={(e) => e.stopPropagation()}>
             <div className="rounded-md p-[1.5px] bg-[linear-gradient(90deg,#02BEED_0%,#646EF6_50%,#FF0094_100%)] hover:brightness-110 transition">
               <div className="px-6 py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2.5">
@@ -257,6 +248,3 @@ function TeamCard({ team }: TeamCardProps) {
     </div>
   );
 }
-
-
-
