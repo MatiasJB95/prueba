@@ -10,7 +10,7 @@ export function ShowcaseHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gradient-to-b from-background/70 via-background/30 to-transparent">
-      {/* fondo animado (NO TOCADO) */}
+      {/* fondo animado */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -left-10 -top-24 w-72 h-72 bg-gradient-radial from-purple-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl" />
         <div className="absolute right-0 -bottom-24 w-64 h-64 bg-gradient-radial from-pink-500/15 via-purple-500/8 to-transparent rounded-full blur-3xl" />
@@ -64,7 +64,7 @@ export function ShowcaseHeader() {
 
         {/* DERECHA: Discord + CTA (desktop) */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Botón Discord con borde de gradiente (tu pedido del <div className="w-24 h-24 bg-gradient-to-l ..."> se aplica como fondo de borde) */}
+          {/* Botón Discord con borde de gradiente*/}
           <a
             href="https://discord.com/invite/eFQ5DZM7DV"
             target="_blank"
@@ -79,7 +79,7 @@ export function ShowcaseHeader() {
               <div className="pl-6 pr-5 py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-3">
                 <div className="justify-start text-stone-50 text-xl font-medium leading-tight">Discord</div>
                 <div className="w-6 h-6 relative overflow-hidden">
-                  {/* Icono oficial Discord (reemplaza al cuadrado blanco) */}
+                  {/* Icono oficial Discord */}
                   <svg
                     className="w-6 h-6 text-stone-50"
                     viewBox="0 0 24 24"
