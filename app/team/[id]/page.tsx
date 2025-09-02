@@ -226,88 +226,63 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
   return (
     <main>
       {/* Contenedor oscuro */}
-      <div
-        className={`
+<div
+  className={`
     relative mx-auto w-full
     mt-[50px]
     text-white bg-[hsl(220,70%,3.9%)] rounded-3xl shadow-xl
-    px-4 py-10
-    max-w-[311px]
-    md:max-w-[689px]
-    lg:max-w-[904px]
-    xl:max-w-[1280px]
-    min-[1920px]:max-w-[1680px]
+
+    /* 👇 MISMO SHELL QUE EL HEADER */
+    max-w-[375px]  px-8  pt-[36px] pb-[16px]
+    md:max-w-[768px]  md:px-10  md:pt-[36px] md:pb-[16px]
+    lg:max-w-[1024px] lg:px-[60px] lg:pt-[36px] lg:pb-[16px]
+    xl:max-w-[1440px] xl:px-20   xl:pt-[36px] xl:pb-[16px]
+    min-[1920px]:max-w-[1920px] min-[1920px]:px-20 min-[1920px]:pt-[36px] min-[1920px]:pb-[16px]
+
+    /* Opcional: para que el scroll “enganche” con la próxima sección */
+    snap-y snap-mandatory
   `}
-      >
+>
         <ShowcaseHeader shareTitle={name} />
 
-        {/* Intro */}
-        <section className="flex flex-col items-center justify-center text-center pt-20 pb-12">
-          <p className=" self-stretch text-white text-center font-['DM Sans'] text-[16px] font-[400] leading-[150%] tracking-[-0.16px] ">
-            {weeksLabel}
-          </p>
-          <h1 className="mt-[12px] text-white text-center font-['DM Sans'] text-[61px] font-[700] leading-[105%] tracking-[-1.83px]">
-            {name}
-          </h1>
-          <div className="mt-[24px] flex items-center gap-3">
-            <span className="text-white font-['DM Sans'] text-[13px] font-[500] leading-[105%] tracking-[-0.13px]">
-              Para
-            </span>
+<section
+  className="relative snap-start mt-10"
+>
+  {/* Wrapper con dimensiones fijas para diferentes breakpoints */}
+  <div className="relative w-[311px] h-[175px] md:w-[500px] md:h-[280px] min-[768px]:w-[680px] min-[768px]:h-[382px] min-[1024px]:w-[905.56px] min-[1024px]:h-[509.38px] min-[1440px]:w-[1280px] min-[1440px]:h-[720px] min-[1920px]:w-[1680px] min-[1920px]:h-[945px] rounded-2xl overflow-hidden mx-auto">
+    {/* IMAGEN: se ajusta al contenedor sin recortar */}
+    <Image
+       src="/image19.png"
+       alt="Cover"
+       fill
+       className="object-cover"
+       priority
+       sizes="(max-width: 768px) 311px, 100vw"
+     />
 
-            <Image
-              src="/nocountry-logo.png"
-              alt="NoCountry"
-              width={156}
-              height={26}
-              priority
-              style={{
-                width: "156.207px",
-                height: "26.216px",
-                aspectRatio: "143 / 24",
-              }}
-              className="opacity-90"
-            />
-          </div>
-        </section>
-
-        {/* Portada */}
-        <section className="relative overflow-hidden rounded-2xl border border-white/10 mt-[32px] mb-[60px]">
-          <Image
-            src={cover ?? "/Healthtech.png"}
-            alt="Cover"
-            width={1200}
-            height={500}
-            className="w-full h-[300px] object-cover"
-            priority
-          />
-        </section>
-
+      {/* TÍTULO EN OVERLAY */}
+      <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center text-center pt-3 md:pt-4">
+        <div className="text-white font-['DM_Sans'] text-[clamp(14px,1.2vw,16px)] leading-normal">
+          Abril 2025
+        </div>
+      </div>
+    </div>
+</section>
         {/* Descripción + Etiquetas */}
-        <section className="pt-6 pb-0 mb-0 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 items-start">
+        <section className="pt-10 pb-0 mb-0 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 items-start">
           {/* Descripción (2/3) */}
           <div className="md:col-span-2 min-w-0">
-            <h3
-              className="mb-[39px] self-stretch text-white font-['DM Sans'] text-[41px] font-[600] leading-[105%] tracking-[-1.025px]"
-              style={{
-                ["leading-trim" as any]: "both",
-                ["text-edge" as any]: "cap",
-              }}
-            >
-              Descripción
-            </h3>
-
-            <p className="max-w-none text-[#AFAFAF] font-['DM Sans'] text-[25px] font-[400] leading-[130%] tracking-[-0.25px]">
-              {description}
-            </p>
+            <div className="self-stretch justify-start text-white text-2xl font-semibold font-['DM_Sans'] leading-relaxed">Descripción</div>
+            <div className="self-stretch justify-start text-zinc-400 text-base font-normal font-['DM_Sans'] leading-tight">{description}</div>
           </div>
 
           {/* Etiquetas (1/3) */}
           {allLabels.length > 0 && (
             <div className="ml-0 md:ml-0 mt-4 md:mt-0 min-w-0">
               <div className="flex flex-wrap gap-2 justify-start md:justify-end md:max-w-none">
-                {allLabels.map((label) => (
+                {allLabels.map((label, index) => (
                   <span
-                    key={label}
+                    key={`${label}-${index}`}
                     className="rounded-full border border-white px-4 py-1 text-sm text-white/80"
                   >
                     {label}
@@ -320,25 +295,9 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
 
         {/* Equipo y Rendimiento */}
         <section className="pt-0 pb-6">
-          <h3
-            className="mt-[120px] text-white font-['DM Sans'] text-[41px] font-[600] leading-[115%] tracking-[-1.025px]"
-            style={{
-              ["leading-trim" as any]: "both",
-              ["text-edge" as any]: "cap",
-            }}
-          >
-            Equipo
-          </h3>
-
-          <h3
-            className="mb-[40px] text-white font-['DM Sans'] text-[41px] font-[600] leading-[115%] tracking-[-1.025px]"
-            style={{
-              ["leading-trim" as any]: "both",
-              ["text-edge" as any]: "cap",
-            }}
-          >
-            y Rendimiento
-          </h3>
+          <div className="mt-[120px] mb-8 justify-start text-white text-2xl font-semibold font-['DM_Sans'] leading-7">
+            Equipo y Rendimiento
+          </div>
 
           {/* ===== Header desktop (md+) sin degradé, Reviews solo en xl+ ===== */}
           <div
@@ -701,21 +660,9 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
               >
                 Otros
               </span>
-              <h3
-                className="
-    mt-6
-    text-white
-    font-['DM_Sans']
-    text-[41px]
-    font-semibold
-    leading-[105%]
-    tracking-[-1.025px]
-  "
-                style={{ ["leading-trim" as any]: "both", ["text-edge" as any]: "cap" }}
-              >
-                Proyectos que
-                <br /> podrían interesarte
-              </h3>
+              <div className="w-64 mt-6 mb-8 justify-start text-white text-2xl font-semibold font-['DM_Sans'] leading-relaxed">
+                Proyectos que podrían interesarte
+              </div>
             </header>
 
             <div
