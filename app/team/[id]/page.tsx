@@ -280,7 +280,7 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
     md:max-w-[768px]  md:px-10  md:pt-[36px] md:pb-[16px]
     lg:max-w-[1024px] lg:px-[60px] lg:pt-[36px] lg:pb-[16px]
     min-[1384px]:max-w-[1344px] min-[1384px]:px-[60px]
-    xl:max-w-[1440px] xl:px-20   xl:pt-[36px] xl:pb-[16px]
+    min-[1440px]:max-w-[1280px] min-[1440px]:px-0 min-[1440px]:pt-[36px] min-[1440px]:pb-[16px]
     min-[1920px]:max-w-[1680px] min-[1920px]:px-0 min-[1920px]:pt-[36px] min-[1920px]:pb-[16px]
 
     /* Opcional: para que el scroll “enganche” con la próxima sección */
