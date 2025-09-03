@@ -63,7 +63,7 @@ export function ShowcaseHeader({ shareTitle }: { shareTitle?: string }) {
 
       <div className="nc-shell relative z-10 flex items-center justify-between pt-9 pb-4">
         <Link href="/" className="flex items-center gap-2">
-          <img src="/nocountry-logo.png" alt="NoCountry Logo" width={143} height={24} className="w-[143px] h-[24px] shrink-0" />
+          <img src="/nocountry-logo.png" alt="NoCountry Logo" className="h-[32px] min-[1440px]:h-[40px] 2xl:h-[48px] w-auto shrink-0" />
         </Link>
 
         {/* DERECHA (desktop): Compartir + CTA */}
