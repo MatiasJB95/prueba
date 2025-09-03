@@ -369,7 +369,9 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
                                'Paraguay': 'https://flagcdn.com/24x18/py.png',
                                'Bolivia': 'https://flagcdn.com/24x18/bo.png',
                                'Brasil': 'https://flagcdn.com/24x18/br.png',
-                               'Brazil': 'https://flagcdn.com/24x18/br.png'
+                               'Brazil': 'https://flagcdn.com/24x18/br.png',
+                               'Guatemala': 'https://flagcdn.com/24x18/gt.png',
+                               'España': 'https://flagcdn.com/24x18/es.png'
                              };
                              const flagUrl = countryFlags[m.country || ''];
                              return flagUrl ? (
