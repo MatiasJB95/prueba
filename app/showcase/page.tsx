@@ -390,7 +390,7 @@ export default function CommunityProjectsPage() {
   );
 }
 
-/* === Card de proyecto (estilos Figma aplicados) === */
+/* === Card de proyecto (estilos del showcase-section.tsx) === */
 export function ProjectCard({ project }: { project: ShowcaseProject }) {
   const cover = project.cover || DEFAULT_COVER;
 
@@ -400,73 +400,61 @@ export function ProjectCard({ project }: { project: ShowcaseProject }) {
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       className="relative overflow-hidden rounded-xl border border-white/10 shadow-lg shadow-black/20 bg-card"
     >
-      <div className="h-full p-5 md:p-6 flex flex-col">
-        {/* Imagen (16:9; si querés forzar 828x465.75 en xl+, cambiar a xl:w-[828px] xl:h-[465.75px]) */}
-        <div className="-mx-5 -mt-5 md:-mx-6 rounded-t-xl overflow-hidden">
-          <div className="relative w-full aspect-[16/9]">
+      <div className="h-full p-5 md:p-6 min-[1380px]:max-[1400px]:p-4 flex flex-col">
+        {/* Imagen (16:9) */}
+        <div className="-mx-5 -mt-5 md:-mx-6 min-[1380px]:max-[1400px]:-mx-4 min-[1380px]:max-[1400px]:-mt-4 rounded-t-xl overflow-hidden">
+          <div className="relative w-full aspect-[16/9] min-[1380px]:max-[1400px]:aspect-[16/8]">
             <img src={cover} alt={`${project.title} cover`} className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
           </div>
         </div>
 
-        {/* Fila 1: Etiquetas (izq) + Entregables (der) */}
-        <div className="mt-5 flex items-center justify-between gap-4">
-          {/* Etiquetas: píldoras negras con texto DM Sans xl */}
-          <div className="flex items-center gap-2 flex-wrap">
+        {/* Etiquetas con especificaciones exactas */}
+        <div className="mt-4 min-[1380px]:max-[1400px]:mt-3">
+          <div className="flex items-center gap-2 flex-wrap max-[390px]:justify-center">
             {project.tags.slice(0, 2).map((t, i) => (
               <span
                 key={i}
-                className="px-4 py-1 bg-gray-900 rounded-[99px] inline-flex justify-center items-center gap-2.5"
+                className="px-3 py-1 bg-gray-900 rounded-[99px] inline-flex justify-center items-center"
               >
-                <span className="text-zinc-200 text-xl font-normal font-['DM_Sans'] leading-tight">{t}</span>
+                <span className="text-zinc-200 text-[0.8rem] font-normal font-['DM_Sans'] leading-tight">{t}</span>
               </span>
             ))}
           </div>
-
-          {/* Entregables exacto Figma */}
-          <div className="inline-flex items-center gap-2">
-            <span className="text-stone-50 text-xl font-normal font-['DM_Sans'] leading-loose">
-              Entregables:
-            </span>
-            <span className="text-stone-50 text-4xl font-bold font-['DM_Sans'] leading-10">
-              {project.deliverables}
-            </span>
-          </div>
         </div>
 
-        {/* Título (exacto Figma) */}
-        <h3 className="mt-2 text-stone-50 text-4xl font-semibold font-['DM_Sans'] leading-10">
+        {/* Título con margin 16px */}
+        <h3 className="mt-4 min-[1380px]:max-[1400px]:mt-3 text-stone-50 text-[2rem] min-[1380px]:max-[1400px]:text-[1.75rem] font-semibold font-['DM_Sans'] leading-tight max-[390px]:text-center">
           {project.title}
         </h3>
 
-        {/* Footer: Por + avatares (redondos) + botón con borde degradé exacto */}
-        <div className="pt-3 flex items-center justify-between gap-3 mt-auto">
-          <div className="flex items-center gap-3">
-            <span className="text-stone-50 text-sm font-medium font-['DM_Sans'] leading-none">Por</span>
-            <div className="flex -space-x-3">
-              {project.members.slice(0, 5).map((m, i) => (
-                <div key={i} className="w-9 h-9 rounded-full border border-zinc-500 overflow-hidden" title={m.name}>
-                  <img src={m.avatar || PLACEHOLDER_AVATAR} alt={m.name} className="w-full h-full object-cover" />
-                </div>
-              ))}
-              {project.members.length > 5 && (
-                <div className="w-9 h-9 rounded-full border border-zinc-500 bg-black/60 text-white flex items-center justify-center text-[10px] font-bold">
-                  +{project.members.length - 5}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Botón con borde degradé (L→R: #02BEED → #646EF6 → #FF0094) */}
-          <Link href={`/team/${project.id}`}>
-            <div className="rounded-md p-[1.5px] bg-[linear-gradient(90deg,#02BEED_0%,#646EF6_50%,#FF0094_100%)] hover:brightness-110 transition">
-              <div className="px-6 py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2.5">
-                <span className="text-stone-50 text-xl font-semibold font-['DM_Sans'] leading-tight">
-                  Ver proyecto
-                </span>
+        {/* Por + avatares 32x32 con margin 20px */}
+        <div className="mt-5 min-[1380px]:max-[1400px]:mt-4">
+          <div className="flex items-center gap-3 mb-5 min-[1380px]:max-[1400px]:mb-4 max-[390px]:flex-col max-[390px]:items-center min-[391px]:justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-stone-50 text-sm font-medium font-['DM_Sans'] leading-none">Por</span>
+              <div className="flex -space-x-2">
+                {project.members.slice(0, 3).map((m, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border border-zinc-500 overflow-hidden" title={m.name}>
+                    <img src={m.avatar || PLACEHOLDER_AVATAR} alt={m.name} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+                {project.members.length > 3 && (
+                  <div className="w-8 h-8 rounded-full border border-zinc-500 bg-black/60 text-white flex items-center justify-center text-[10px] font-bold">
+                    +{project.members.length - 3}
+                  </div>
+                )}
               </div>
             </div>
-          </Link>
+            
+            {/* Botón con gradiente según especificación */}
+            <Link href={`/team/${project.id}`} className="max-[390px]:block max-[390px]:w-full min-[391px]:inline-block">
+              <div className="relative px-6 py-3 bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600 rounded-md flex justify-center items-center gap-2.5 max-[390px]:self-stretch min-[391px]:whitespace-nowrap">
+                <div className="absolute inset-0.5 bg-gray-900 rounded-md"></div>
+                <div className="relative z-10 w-full text-center text-stone-50 text-base font-semibold font-['DM_Sans'] leading-none min-[391px]:w-auto">Ver proyecto</div>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.article>
