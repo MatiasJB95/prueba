@@ -23,4 +23,5 @@ export interface TeamType {
   sector: string
   vertical: string
   participationRate: number
+  tags?: string[]
 }

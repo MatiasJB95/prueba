@@ -90,7 +90,7 @@ export function ShowcaseHeader({ shareTitle }: { shareTitle?: string }) {
                   onClick={() => openTab(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`)}
                   className="w-full text-left px-3 py-2 text-sm text-white/90 hover:bg-white/10 rounded"
                 >
-                  Twitter (X)
+                  X
                 </button>
                 <button
                   onClick={() => openTab(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`)}
