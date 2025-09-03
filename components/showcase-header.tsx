@@ -49,8 +49,8 @@ export function ShowcaseHeader() {
         className="
           nc-shell relative z-10
           flex items-center justify-between
-          h-[100px] min-[1440px]:h-[120px]
-          pt-4 pb-2 min-[1440px]:pt-9 min-[1440px]:pb-4
+          h-[100px] min-[1384px]:h-[100px] min-[1440px]:h-[120px]
+          pt-4 pb-2 min-[1384px]:pt-9 min-[1384px]:pb-4 min-[1440px]:pt-9 min-[1440px]:pb-4
         "
       >
         {/* IZQUIERDA: Logo (28px alto) */}
@@ -76,8 +76,8 @@ export function ShowcaseHeader() {
             {/* Borde con gradiente */}
             <div className="p-[1px] rounded-md bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600">
               {/* Contenido original del botón */}
-              <div className="pl-4 pr-3 py-2 min-[1440px]:pl-5 min-[1440px]:pr-4 min-[1440px]:py-2.5 2xl:pl-6 2xl:pr-5 2xl:py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2 min-[1440px]:gap-2.5 2xl:gap-3">
-                <div className="justify-start text-stone-50 text-base min-[1440px]:text-lg 2xl:text-xl font-medium leading-tight">Discord</div>
+              <div className="pl-4 pr-3 py-2 min-[1384px]:px-4 min-[1384px]:py-2 min-[1440px]:pl-5 min-[1440px]:pr-4 min-[1440px]:py-2.5 2xl:pl-6 2xl:pr-5 2xl:py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2 min-[1384px]:gap-3 min-[1440px]:gap-2.5 2xl:gap-3">
+                <div className="justify-start text-stone-50 text-base min-[1384px]:text-[20px] min-[1440px]:text-lg 2xl:text-xl font-medium leading-tight min-[1384px]:leading-[1.05] min-[1384px]:tracking-[-0.2px]">Discord</div>
                 <div className="w-4 h-4 min-[1440px]:w-5 min-[1440px]:h-5 2xl:w-6 2xl:h-6 relative overflow-hidden">
                   {/* Icono oficial Discord */}
                   <svg
@@ -98,7 +98,7 @@ export function ShowcaseHeader() {
             href="https://tally.so/r/3EEp02"
             target="_blank"
             rel="noopener noreferrer"
-            className="self-stretch px-4 py-2 min-[1440px]:px-5 min-[1440px]:py-2.5 2xl:px-6 2xl:py-3 bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600 rounded-md inline-flex justify-center items-center gap-2 min-[1440px]:gap-2.5 2xl:gap-2.5 text-stone-50 text-base min-[1440px]:text-lg 2xl:text-xl font-semibold leading-snug shadow-black/30"
+            className="self-stretch px-4 py-2 min-[1384px]:px-6 min-[1384px]:py-1.5 min-[1440px]:px-5 min-[1440px]:py-2.5 2xl:px-6 2xl:py-3 bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600 rounded-md inline-flex justify-center items-center gap-2 min-[1440px]:gap-2.5 2xl:gap-2.5 text-stone-50 text-base min-[1384px]:text-sm min-[1440px]:text-lg 2xl:text-xl font-semibold leading-snug shadow-black/30"
           >
             Contanos sobre tu proyecto
           </a>
