@@ -66,7 +66,7 @@
       "name": "Camilo M.",
       "country": "Colombia",
       "role": "Front End",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 4,
       "reviews": 16,
       "rating": 87
@@ -75,7 +75,7 @@
       "name": "Facundo B.",
       "country": "Argentina",
       "role": "Front End",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 2,
       "reviews": 8,
       "rating": 89
@@ -85,7 +85,7 @@
       "name": "Cynthia O.",
       "country": "Argentina",
       "role": "UX/UI",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 2,
       "reviews": 8,
       "rating": 90
@@ -107,14 +107,14 @@
   "tools": [""],
   "skillNames": ["Python", "Django", "JavaScript", "React"],
   "dataTime":"Septiembre 2024",
-  "portada":"/public/PortadaWAKI.png",
+  "portada":"/PortadaWAKI.png",
   "members": [
     {
       "id": 1,
       "name": "Diego G.",
       "country": "Argentina",
       "role": "Team Leader",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 4,
       "reviews": 16,
       "rating": 89
@@ -134,7 +134,7 @@
       "name": "Sofía Á",
       "country": "Guatemala",
       "role": "UX/UI",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 2,
       "reviews": 8,
       "rating": 86
@@ -144,7 +144,7 @@
       "name": "Vivian R.",
       "country": "Chile",
       "role": "UX/UI",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 2 ,
       "reviews": 8,
       "rating": 81
@@ -164,7 +164,7 @@
       "name": "Roger P.",
       "country": "Argentina",
       "role": "Project Manager",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 5 ,
       "reviews": 20,
       "rating": 72
@@ -173,7 +173,7 @@
       "name": "Fernando S.",
       "country": "Argentina",
       "role": "Back End",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 3,
       "reviews": 12,
       "rating": 90
@@ -196,7 +196,7 @@
   "tools": [""],
   "skillNames": ["Flutter", "Dart", "Java", "Spring"],
   "dataTime":"Noviembre 2024",
-  "portada":"/public/PortadaBookie.png",
+  "portada":"/PortadaBookie.png",
   "members": [
     {
       "id": 1,
@@ -223,10 +223,10 @@
       "name": "Diego A.",
       "country": "Colombia",
       "role": "UX/UI",
-      "avatarUrl": "/public/placeholder-user.jpg",
-      "simulations": 5,
-      "reviews": 20,
-      "rating": 80
+      "avatarUrl": "/placeholder-user.jpg",
+        "simulations": 5,
+        "reviews": 20,
+        "rating": 80
     },
     {
       "id": 4,
@@ -243,7 +243,7 @@
       "name": "Facundo A.",
       "country": "Argentina",
       "role": "Back End",
-      "avatarUrl": "public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 6 ,
       "reviews": 24,
       "rating": 92
@@ -265,15 +265,15 @@
   "tools": ["Cloudinary", "Amazon web service"],
   "skillNames": ["NestJS", "TypeORM", "JavaScript", "NextJs"],
   "dataTime":"Noviembre 2024",
-  "portada":"/PortadaKlowHub.png",
+  "portada":"/PortadaKlowhub.png",
   "members": [
     {
       "id": 1,
       "name": "Marcelo P.",
       "country": "Argentina",
       "role": "Team Leader",
-      "avatarUrl": "/public/placeholder-user.jpg",
-        "simulations": 4 ,
+      "avatarUrl": "/placeholder-user.jpg",
+      "simulations": 4,
       "reviews": 20,
       "rating": 88
     },
@@ -340,10 +340,10 @@
       "name": "Fernando L.",
       "country": "Argentina",
       "role": "QA Tester",
-      "avatarUrl": "/public/placeholder-user.jpg",
-      "simulations": 2,
-      "reviews": 8,
-      "rating": 98
+      "avatarUrl": "/placeholder-user.jpg",
+        "simulations": 2,
+        "reviews": 8,
+        "rating": 98
     }, {
       "id": 9,
       "name": "Carolina S",
@@ -380,7 +380,7 @@
   "tools": [""],
   "skillNames": ["Java", "Spring", "Thymeleaf", "TypeScript"],
   "dataTime":"Febrero 2025",
-  "portada":"/PortadaIUPI.png",
+  "portada":"/PortadaiUpi.png",
   "members": [
     {
       "id": 1,
@@ -468,7 +468,7 @@
   "tools": [""],
   "skillNames": ["Python", "Django", "JavaScript", "NextJs"],
   "dataTime":"Julio 2025",
-  "portada":"/public/PortadaPlayA.png",
+  "portada":"/PortadaPlayA.png",
   "members": [
     {
       "id": 1,
@@ -525,7 +525,7 @@
       "name": "Pablo S.",
       "country": "Mexico",
       "role": "Back End",
-      "avatarUrl": "/public/placeholder-user.jpg",
+      "avatarUrl": "/placeholder-user.jpg",
       "simulations": 1,
       "reviews":5,
       "rating": 68
@@ -599,7 +599,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon2.png",
+  "portada":"/PortadaViamaticaHackIAthon2.png",
   "members": [
     {
       "id": 1,
@@ -648,7 +648,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon2.png",
+  "portada":"/PortadaViamaticaHackIAthon2.png",
   "members": [
     {
       "id": 1,
@@ -696,7 +696,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon2.png",
+  "portada":"/PortadaViamaticaHackIAthon2.png",
   "members": [
     {
       "id": 1,
@@ -745,7 +745,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon1.png",
+  "portada":"/PortadaViamaticaHackIAthon1.png",
   "members": [
     {
       "id": 1,
@@ -795,7 +795,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon1.png",
+  "portada":"/PortadaViamaticaHackIAthon1.png",
   "members": [
     {
       "id": 1,
@@ -844,7 +844,7 @@
   "tools": [""],
   "skillNames": [""],
   "dataTime":"Agosto 2025",
-  "portada":"/public/PortadaViamaticaHackIAthon1.png",
+  "portada":"/PortadaViamaticaHackIAthon1.png",
   "members": [
     {
       "id": 1,
