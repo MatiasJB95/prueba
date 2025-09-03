@@ -5,6 +5,8 @@ import { ShowcaseHeader } from "@/components/HeaderBrand";
 import { Users, FileText, Video, Clock } from "lucide-react";
 import React from "react";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
+import { TeamCard } from "@/components/team-card";
+import type { TeamType } from "@/lib/types";
 import styles from "./other-projects.module.css";
 
 // ---------- Tipos ----------
@@ -14,8 +16,7 @@ type Member = {
   country?: string;
   role: string;
   avatarUrl?: string;
-  actividadHoras: number;
-  entregables: number;
+  simulations: number;
   reviews: number;
   rating: number;
 };
@@ -39,6 +40,7 @@ type Team = {
   tools?: string[];
   languages?: string[];
   skillNames?: string[];
+  dataTime?: string;
 };
 
 // ---------- Utils ----------
@@ -94,8 +96,7 @@ function normalizeMember(m: any): Member {
     country: m?.country ?? m?.pais ?? undefined,
     role: String(m?.role ?? m?.puesto ?? "Miembro"),
     avatarUrl: avatar,
-    actividadHoras: toNumber(m?.actividadHoras, 0),
-    entregables: toNumber(m?.entregables, 0),
+    simulations: toNumber(m?.simulations, 0),
     reviews: toNumber(m?.reviews, 0),
     rating: toNumber(m?.rating, 0),
   };
@@ -145,6 +146,7 @@ function normalizeTeam(t: any): Team {
       ? t.skillNames.map(String)
       : [],
     skillNames: Array.isArray(t?.skillNames) ? t.skillNames.map(String) : [],
+    dataTime: String(t?.dataTime ?? ""),
   };
 }
 
@@ -183,6 +185,39 @@ function teamToProject(t: Team): Project {
   } as Project;
 }
 
+function teamToTeamType(t: Team): TeamType {
+  // Calcular participationRate basado en el rating promedio de los miembros
+  const avgRating = t.members?.length > 0 
+    ? t.members.reduce((sum: number, member: any) => sum + (member.rating || 0), 0) / t.members.length
+    : 0;
+  
+  // Mapear miembros al formato correcto
+  const mappedMembers = t.members?.map((member: any) => ({
+    name: member.name,
+    role: member.role,
+    avatar: member.avatarUrl?.replace('/public/', '/') || "/placeholder.svg"
+  })) || [];
+  
+  return {
+    id: String(t.id),
+    projectName: t.name,
+    name: t.company || "NoCountry",
+    description: t.description || "Descripción no disponible",
+    category: t.tags?.[0] || "Otro",
+    sector: t.tags?.[0] || "Otro",
+    vertical: t.tags?.[0] || "General",
+    area: t.tags?.[1] || "Desarrollo",
+    coverImage: t.cover?.replace('/public/', '/') || "/placeholder.svg",
+    rating: avgRating / 10, // Convertir a escala 0-10
+    participationRate: avgRating,
+    isPremium: avgRating > 90, // Marcar como premium si el rating promedio es alto
+    members: mappedMembers,
+    memberCount: t.members?.length || 0,
+    projectsCompleted: 1, // Valor por defecto
+    successRate: avgRating // Usar el mismo valor que participationRate
+  };
+}
+
 // ---------- Página ----------
 type ParamsMaybePromise = { id: string } | Promise<{ id: string }>;
 
@@ -203,9 +238,17 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
     .filter((t) => t.id !== id && slugify(t.name) !== id)
     .map(teamToProject);
 
+  // Equipos para las cards (excluye el actual)
+  const teamsAll: TeamType[] = teams
+    .filter((t) => t.id !== id && slugify(t.name) !== id)
+    .map(teamToTeamType);
+
   // Selección aleatoria
   const shuffled = [...projectsAll].sort(() => Math.random() - 0.5);
   const pick3 = shuffled.slice(0, Math.min(3, shuffled.length));
+  
+  const shuffledTeams = [...teamsAll].sort(() => Math.random() - 0.5);
+  const pick3Teams = shuffledTeams.slice(0, Math.min(3, shuffledTeams.length));
 
   const {
     name,
@@ -236,8 +279,9 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
     max-w-[375px]  px-8  pt-[36px] pb-[16px]
     md:max-w-[768px]  md:px-10  md:pt-[36px] md:pb-[16px]
     lg:max-w-[1024px] lg:px-[60px] lg:pt-[36px] lg:pb-[16px]
+    min-[1384px]:max-w-[1344px] min-[1384px]:px-[60px]
     xl:max-w-[1440px] xl:px-20   xl:pt-[36px] xl:pb-[16px]
-    min-[1920px]:max-w-[1920px] min-[1920px]:px-20 min-[1920px]:pt-[36px] min-[1920px]:pb-[16px]
+    min-[1920px]:max-w-[1680px] min-[1920px]:px-0 min-[1920px]:pt-[36px] min-[1920px]:pb-[16px]
 
     /* Opcional: para que el scroll “enganche” con la próxima sección */
     snap-y snap-mandatory
@@ -249,10 +293,10 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
   className="relative snap-start mt-10"
 >
   {/* Wrapper con dimensiones fijas para diferentes breakpoints */}
-  <div className="relative w-[311px] h-[175px] md:w-[500px] md:h-[280px] min-[768px]:w-[680px] min-[768px]:h-[382px] min-[1024px]:w-[905.56px] min-[1024px]:h-[509.38px] min-[1440px]:w-[1280px] min-[1440px]:h-[720px] min-[1920px]:w-[1680px] min-[1920px]:h-[945px] rounded-2xl overflow-hidden mx-auto">
+  <div className="relative w-[311px] h-[175px] md:w-[500px] md:h-[280px] min-[768px]:w-[680px] min-[768px]:h-[382px] min-[1024px]:w-[905.56px] min-[1024px]:h-[509.38px] min-[1384px]:w-[1224px] min-[1384px]:h-[570px] min-[1440px]:w-[1280px] min-[1440px]:h-[720px] min-[1920px]:w-[1680px] min-[1920px]:h-[900px] rounded-2xl overflow-hidden mx-auto">
     {/* IMAGEN: se ajusta al contenedor sin recortar */}
     <Image
-       src="/image19.png"
+       src={cover || "/placeholder.jpg"}
        alt="Cover"
        fill
        className="object-cover"
@@ -262,17 +306,18 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
 
       {/* TÍTULO EN OVERLAY */}
       <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center text-center pt-3 md:pt-4">
-        <div className="text-white font-['DM_Sans'] text-[clamp(14px,1.2vw,16px)] leading-normal">
-          Abril 2025
+        <div className="text-white font-['DM_Sans'] text-[clamp(14px,1.2vw,16px)] leading-normal bg-black/50 px-2 py-1 rounded">
+          {team.dataTime || "Fecha no disponible"}
         </div>
       </div>
     </div>
 </section>
+
         {/* Descripción + Etiquetas */}
         <section className="pt-10 pb-0 mb-0 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 items-start">
           {/* Descripción (2/3) */}
           <div className="md:col-span-2 min-w-0">
-            <div className="self-stretch justify-start text-white text-2xl font-semibold font-['DM_Sans'] leading-relaxed">Descripción</div>
+            <div className="self-stretch justify-start text-white text-2xl font-semibold font-['DM_Sans'] leading-relaxed">{name}</div>
             <div className="self-stretch justify-start text-zinc-400 text-base font-normal font-['DM_Sans'] leading-tight">{description}</div>
           </div>
 
@@ -303,18 +348,15 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
           <div
             className="
               hidden md:grid border-b border-white/12 py-3 px-6
-              [grid-template-columns:minmax(0,1fr)_120px_120px_120px]
-              xl:[grid-template-columns:minmax(0,1fr)_120px_120px_120px_120px]
+              [grid-template-columns:minmax(0,1fr)_120px_120px]
+              xl:[grid-template-columns:minmax(0,1fr)_120px_120px_120px]
             "
           >
             <div className="text-white font-['DM Sans'] text-[16px] font-[600] leading-[130%] tracking-[-0.16px] ml-2">
               Talento
             </div>
             <div className="text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-8">
-              Actividad
-            </div>
-            <div className="text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-8">
-              Entregables
+              Simulaciones
             </div>
             <div className="hidden xl:block text-white text-center font-['DM Sans'] text-[14px] font-[600] leading-[130%] tracking-[-0.16px] ml-9">
               Reviews
@@ -333,12 +375,12 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
                 className="pointer-events-none absolute inset-y-0 right-0 w-[120px] z-0 rounded-md
                  bg-gradient-to-r from-[rgba(11,58,82,0.45)] to-[rgba(106,17,77,0.45)]"
               />
-              {/* 👉 Grid externo: 1fr + métricas (360px en md, 480px en xl) */}
+              {/* 👉 Grid externo: 1fr + métricas (240px en md, 360px en xl) */}
               <div
                 className="
         grid relative z-10
-        md:[grid-template-columns:minmax(0,1fr)_360px]
-        xl:[grid-template-columns:minmax(0,1fr)_480px]
+        md:[grid-template-columns:minmax(0,1fr)_240px]
+        xl:[grid-template-columns:minmax(0,1fr)_360px]
       "
               >
                 {members.map((m) => (
@@ -362,29 +404,25 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
                       </div>
                     </div>
 
-                    {/* 👉 Métricas: 3 cols en md, 4 cols en xl */}
+                    {/* 👉 Métricas: 2 cols en md, 3 cols en xl */}
                     <div
                       className="
               grid
-              md:[grid-template-columns:120px_120px_120px]
-              xl:[grid-template-columns:120px_120px_120px_120px]
+              md:[grid-template-columns:120px_120px]
+              xl:[grid-template-columns:120px_120px_120px]
             "
                     >
-                      {/* Actividad */}
+                      {/* Simulaciones */}
                       <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4 ">
-                        {m.actividadHoras}
-                      </div>
-                      {/* Entregables */}
-                      <div className="text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4">
-                        {m.entregables}
+                        {m.simulations || 0}
                       </div>
                       {/* Reviews (oculto en md–lg para que no exista la columna) */}
                       <div className="hidden xl:block text-center text-1xl font-semibold tabular-nums text-white/90 border-t border-white/10 py-4">
                         {m.reviews}
                       </div>
-                      {/* Rating: última columna siempre visible (3ra en md, 4ta en xl) */}
+                      {/* Rating: última columna siempre visible (2da en md, 3ra en xl) */}
                       <div className="text-center text-1xl font-extrabold text-white border-t border-white/10 py-4">
-                        {m.rating}
+                        {m.rating}<span className="text-sm font-normal">/100</span>
                       </div>
                     </div>
                   </div>
@@ -449,7 +487,7 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
 
                   {/* Rating (columna derecha sobre el degradé) */}
                   <div className="text-2xl max-[360px]:text-xl font-extrabold text-white text-right w-[96px] sm:w-[110px]">
-                    {m.rating}
+                    {m.rating}<span className="text-sm font-normal">/100</span>
                   </div>
                 </div>
               ))}
@@ -458,8 +496,8 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
         </section>
 
         {/* Métricas del equipo */}
-        <section className="w-full flex items-center py-10">
-          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="w-full flex justify-center items-center py-10">
+          <div className="max-w-4xl grid grid-cols-2 md:grid-cols-3 gap-12 px-4">
             {/* Tamaño de equipo */}
             {(() => {
               const m = findMetric(metrics, ["tamaño de equipo", "tamano de equipo", "team size"]);
@@ -505,29 +543,12 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
               );
             })()}
 
-            {/* Tiempo total simulado (horas) */}
-            {(() => {
-              const m = findMetric(metrics, ["tiempo total", "horas", "simulado"]);
-              const val = metricNumber(m?.value);
-              const unit = (m?.sublabel ?? "").toString().toLowerCase().includes("hora") ? "horas" : "";
-              return (
-                <div className="flex flex-col items-center text-center">
-                  <div className="flex items-center gap-2">
-                    <div className="text-3xl md:text-4xl font-semibold">{val}</div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4 opacity-80" />
-                      {unit && <span className="text-sm text-white/80">{unit}</span>}
-                    </div>
-                  </div>
-                  <div className="leading-tight text-sm text-white/80 mt-1">Tiempo total simulado</div>
-                </div>
-              );
-            })()}
+
           </div>
         </section>
 
         {/* CTA full-width (full-bleed) dentro del contenedor */}
-        <section className="relative mx-[calc(50%-50vw)] w-screen bg-white text-black py-[52px] px-6 md:px-12 mt-[120px] rounded-none">
+        <section className="relative mx-[calc(50%-50vw)] w-screen bg-white text-black py-[52px] px-6 md:px-12 mt-[60px] rounded-none">
           <div
             className={`
     mx-auto
@@ -632,7 +653,7 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
         </section>
 
         {/* Otros proyectos — centrado, sin solapes y sin cortes a la derecha */}
-        <section className="relative w-full overflow-x-clip py-10 mt-[120px] ">
+        <section className="relative w-full overflow-x-clip py-10 mt-[60px] ">
           <div
             className={`
       mx-auto w-full
@@ -676,16 +697,16 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
   "
             >
               {/* Siempre mostramos 2 primeras */}
-              {pick3.slice(0, 2).map((p) => (
-                <div key={p.id}>
-                  <ProjectCard project={p} />
+              {pick3Teams.slice(0, 2).map((team) => (
+                <div key={team.id}>
+                  <TeamCard team={team} />
                 </div>
               ))}
 
               {/* La 3ª solo desde xl (≥1280) */}
-              {pick3[2] && (
+              {pick3Teams[2] && (
                 <div className="hidden xl:block">
-                  <ProjectCard project={pick3[2]} />
+                  <TeamCard team={pick3Teams[2]} />
                 </div>
               )}
             </div>

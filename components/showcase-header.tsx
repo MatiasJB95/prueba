@@ -49,8 +49,8 @@ export function ShowcaseHeader() {
         className="
           nc-shell relative z-10
           flex items-center justify-between
-          h-[120px]          /* 7.5rem */
-          pt-9 pb-4
+          h-[100px] min-[1440px]:h-[120px]
+          pt-4 pb-2 min-[1440px]:pt-9 min-[1440px]:pb-4
         "
       >
         {/* IZQUIERDA: Logo (28px alto) */}
@@ -58,7 +58,7 @@ export function ShowcaseHeader() {
   <img
     src="/nocountry-logo.png"
     alt="NoCountry Logo"
-    className="h-[48px] w-auto shrink-0"  // <-- igual altura que los botones
+    className="h-[32px] min-[1440px]:h-[40px] 2xl:h-[48px] w-auto shrink-0"
   />
 </Link>
 
@@ -76,12 +76,12 @@ export function ShowcaseHeader() {
             {/* Borde con gradiente */}
             <div className="p-[1px] rounded-md bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600">
               {/* Contenido original del botón */}
-              <div className="pl-6 pr-5 py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-3">
-                <div className="justify-start text-stone-50 text-xl font-medium leading-tight">Discord</div>
-                <div className="w-6 h-6 relative overflow-hidden">
+              <div className="pl-4 pr-3 py-2 min-[1440px]:pl-5 min-[1440px]:pr-4 min-[1440px]:py-2.5 2xl:pl-6 2xl:pr-5 2xl:py-3 bg-gray-900 rounded-md inline-flex justify-center items-center gap-2 min-[1440px]:gap-2.5 2xl:gap-3">
+                <div className="justify-start text-stone-50 text-base min-[1440px]:text-lg 2xl:text-xl font-medium leading-tight">Discord</div>
+                <div className="w-4 h-4 min-[1440px]:w-5 min-[1440px]:h-5 2xl:w-6 2xl:h-6 relative overflow-hidden">
                   {/* Icono oficial Discord */}
                   <svg
-                    className="w-6 h-6 text-stone-50"
+                    className="w-4 h-4 min-[1440px]:w-5 min-[1440px]:h-5 2xl:w-6 2xl:h-6 text-stone-50"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden="true"
@@ -98,7 +98,7 @@ export function ShowcaseHeader() {
             href="https://tally.so/r/3EEp02"
             target="_blank"
             rel="noopener noreferrer"
-            className="self-stretch px-6 py-3 bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600 rounded-md inline-flex justify-center items-center gap-2.5 text-stone-50 text-xl font-semibold leading-snug shadow-black/30"
+            className="self-stretch px-4 py-2 min-[1440px]:px-5 min-[1440px]:py-2.5 2xl:px-6 2xl:py-3 bg-gradient-to-l from-cyan-500 via-indigo-500 to-pink-600 rounded-md inline-flex justify-center items-center gap-2 min-[1440px]:gap-2.5 2xl:gap-2.5 text-stone-50 text-base min-[1440px]:text-lg 2xl:text-xl font-semibold leading-snug shadow-black/30"
           >
             Contanos sobre tu proyecto
           </a>
@@ -107,12 +107,12 @@ export function ShowcaseHeader() {
         {/* Mobile: botón menú (derecha) */}
         <div className="md:hidden relative z-10">
           <button
-            className="p-2 rounded-md hover:bg-white/10 transition"
+            className="p-1.5 min-[1440px]:p-2 rounded-md hover:bg-white/10 transition"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Abrir menú"
             title="Menú"
           >
-            {isMenuOpen ? <X /> : <Menu />}
+            {isMenuOpen ? <X className="w-5 h-5 min-[1440px]:w-6 min-[1440px]:h-6" /> : <Menu className="w-5 h-5 min-[1440px]:w-6 min-[1440px]:h-6" />}
           </button>
         </div>
       </div>
@@ -124,10 +124,10 @@ export function ShowcaseHeader() {
             <div
               className="
                 mx-auto w-full
-                max-w-[375px]  px-10  pt-4 pb-4
-                md:max-w-[768px]  md:px-10
-                lg:max-w-[1024px] lg:px-[60px]
-                xl:max-w-[1440px] xl:px-20
+                max-w-[375px]  px-6  pt-3 pb-3
+                md:max-w-[768px]  md:px-8
+                lg:max-w-[1024px] lg:px-12
+                min-[1440px]:max-w-[1440px] min-[1440px]:px-20 min-[1440px]:pt-4 min-[1440px]:pb-4
                 min-[1920px]:max-w-[1920px] min-[1920px]:px-20
                 flex flex-col gap-3
               "
