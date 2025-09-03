@@ -265,7 +265,7 @@
   "tools": ["Cloudinary", "Amazon web service"],
   "skillNames": ["NestJS", "TypeORM", "JavaScript", "NextJs"],
   "dataTime":"Noviembre 2024",
-  "portada":"/public/PortadaKlowHub.png",
+  "portada":"/PortadaKlowHub.png",
   "members": [
     {
       "id": 1,
@@ -380,7 +380,7 @@
   "tools": [""],
   "skillNames": ["Java", "Spring", "Thymeleaf", "TypeScript"],
   "dataTime":"Febrero 2025",
-  "portada":"/public/PortadaIUPI.png",
+  "portada":"/PortadaIUPI.png",
   "members": [
     {
       "id": 1,
