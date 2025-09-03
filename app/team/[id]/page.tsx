@@ -289,11 +289,16 @@ export default async function Page({ params }: { params: ParamsMaybePromise }) {
 >
         <ShowcaseHeader shareTitle={name} />
 
+        {/* Título del equipo */}
+        <h1 className="text-white text-4xl md:text-5xl font-bold font-['DM_Sans'] text-center mt-10 mb-6">
+          {name}
+        </h1>
+
 <section
-  className="relative snap-start mt-10"
+  className="relative snap-start"
 >
   {/* Wrapper con dimensiones fijas para diferentes breakpoints */}
-  <div className="relative w-[311px] h-[175px] md:w-[500px] md:h-[280px] min-[768px]:w-[680px] min-[768px]:h-[382px] min-[1024px]:w-[905.56px] min-[1024px]:h-[509.38px] min-[1384px]:w-[1224px] min-[1384px]:h-[570px] min-[1440px]:w-[1280px] min-[1440px]:h-[720px] min-[1920px]:w-[1680px] min-[1920px]:h-[900px] rounded-2xl overflow-hidden mx-auto">
+  <div className="relative w-[311px] h-[175px] md:w-[500px] md:h-[280px] min-[768px]:w-[680px] min-[768px]:h-[352px] min-[1024px]:w-[905.56px] min-[1024px]:h-[479.38px] min-[1384px]:w-[1224px] min-[1384px]:h-[522px] min-[1440px]:w-[1280px] min-[1440px]:h-[672px] min-[1920px]:w-[1680px] min-[1920px]:h-[852px] rounded-2xl overflow-hidden mx-auto">
     {/* IMAGEN: se ajusta al contenedor sin recortar */}
     <Image
        src={cover || "/placeholder.jpg"}
